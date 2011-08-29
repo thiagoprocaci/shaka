@@ -49,3 +49,8 @@ uploads/
 *.iml
 *.ipr
 *.iws
+
+
+# other crazy things #
+######################
+*.exe.stackdump
