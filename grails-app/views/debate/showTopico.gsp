@@ -18,20 +18,7 @@
                 <div class="message">${flash.message}</div>
             </g:if>
             <h1>${fieldValue(bean: topicoInstance, field: "titulo")}</h1>
-            <div class="list">
-
-                <table>
-                   <tbody>
-                        <g:each in="${topicoInstance?.mensagemList}" var="m" status="i">
-                            <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                                <td valign="top" class="value">
-                                        ${m?.texto?.decodeHTML()}
-                                </td>
-                            </tr>
-                        </g:each>
-                    </tbody>
-                </table>
-            </div>
+            <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}"/>
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${topicoInstance?.id}" />

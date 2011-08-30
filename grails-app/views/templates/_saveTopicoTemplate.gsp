@@ -1,3 +1,5 @@
+<%@ page import="org.springframework.util.StringUtils"%>
+
 <div class="nav">
     <span class="menuButton">
        <a class="home" href="${createLink(uri: '/')}">
@@ -6,7 +8,6 @@
     </span>
 </div>
  <div class="body">
-     <h1><g:message code="novoTopico" /></h1>
      <g:if test="${message}">
          <div class="message">${message}</div>
      </g:if>
@@ -16,6 +17,23 @@
              <g:renderErrors bean="${mensagemInstance}" as="list" />
            </div>
      </g:if>
+     <g:if test="${visualizar}">
+             <h1><g:message code="visualizacao" /></h1>
+             <h1>${fieldValue(bean: topicoInstance, field: "titulo")}</h1>
+             <div class="list">
+                <table>
+                   <tbody>
+                       <tr class="odd">
+                           <td valign="top" class="value">
+                                   ${mensagemInstance?.texto?.decodeHTML()}
+                           </td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+
+     </g:if>
+     <h1><g:message code="novoTopico" /></h1>
      <g:form>
          <div class="dialog">
              <table>
@@ -28,11 +46,11 @@
                          </td>
                          <td valign="top" class="value ${hasErrors(bean: topicoInstance, field: 'titulo', 'errors')}">
                              <g:if test="${topicoInstance.id == null}">
-                             	<g:textField name="titulo" value="${topicoInstance?.titulo}" style="width:650px" maxlength="100" />
+                                 <g:textField name="titulo" value="${topicoInstance?.titulo}" style="width:650px" maxlength="100" />
                              </g:if>
                              <g:if test="${topicoInstance.id != null}">
-                             	${fieldValue(bean: topicoInstance, field: "titulo")}
-                             	<g:hiddenField name="id" value="${topicoInstance.id}"/>
+                                 ${fieldValue(bean: topicoInstance, field: "titulo")}
+                                 <g:hiddenField name="id" value="${topicoInstance.id}"/>
                              </g:if>
                          </td>
                      </tr>
@@ -53,8 +71,13 @@
          </div>
          <div class="buttons">
              <span class="button">
-                 <g:actionSubmit class="save" action="${action}" value="${message(code: 'salvar')}" />
+                 <g:actionSubmit class="save" action="${saveAction}" value="${message(code: 'salvar')}" />
+                 <g:actionSubmit class="edit" action="${visualizarAction}" value="${message(code: 'visualizar')}" />
              </span>
          </div>
+         <g:if test="${topicoInstance.id != null}">
+             <h1><g:message code="historicoMensagens"/></h1>
+             <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}"/>
+         </g:if>
      </g:form>
 </div>

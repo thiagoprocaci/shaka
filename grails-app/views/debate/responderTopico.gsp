@@ -4,17 +4,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="layout" content="main" />
-<g:set var="entityName"
-	value="${message(code: 'topico.label', default: 'Topico')}" />
-<title><g:message code="default.create.label"
-		args="[entityName]" />
-</title>
+<title><g:message code="shakaProject"  /></title>
 </head>
 <body>
-	<g:formularioSaveTopico action="saveResposta"
-		mensagemInstance="${mensagemInstance}"
-		topicoInstance="${topicoInstance}"
-		message="${flash.message}" />
+    <g:formularioSaveTopico saveAction="saveResposta"
+        visualizarAction="visualizar"
+        mensagemInstance="${mensagemInstance}"
+        topicoInstance="${topicoInstance}"
+        message="${flash.message}" />
 
 </body>
 </html>

@@ -7,9 +7,10 @@
         <title><g:message code="shakaProject"  /></title>
     </head>
     <body>
-		<g:formularioSaveTopico action="saveTopico"
-				mensagemInstance="${mensagemInstance}"
-				topicoInstance="${topicoInstance}"
-				message="${flash.message}" />
+        <g:formularioSaveTopico saveAction="saveTopico"
+                visualizarAction="visualizar"
+                mensagemInstance="${mensagemInstance}"
+                topicoInstance="${topicoInstance}"
+                message="${flash.message}" />
     </body>
 </html>

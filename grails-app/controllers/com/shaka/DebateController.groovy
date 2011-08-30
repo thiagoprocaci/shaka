@@ -1,22 +1,35 @@
 package com.shaka
 
 
+/**
+ *
+ * Controller para manipular uma debate (topico + mensagens)
+ *
+ */
 class DebateController {
 
-     static allowedMethods = [saveTopico: "POST", saveResposta: "POST"]
+    //TODO paginacao na exibiacao das mensagens
 
-     def debateService
+    static allowedMethods = [saveTopico: "POST", saveResposta: "POST"]
+
+    def debateService
 
     def index = {
         redirect(action: "createTopico", params: params)
     }
 
+    /**
+     *  Inicializa a criacao de um novo topico para debate
+     */
     def createTopico = {
         def topico = new Topico()
         def mensagem = new Mensagem()
         return [topicoInstance:topico, mensagemInstance:mensagem]
     }
 
+    /**
+     * Salva um novo topico
+     */
     def saveTopico = {
         def topicoInstance = new Topico(params)
         def mensagemInstance = new Mensagem(params)
@@ -28,20 +41,30 @@ class DebateController {
         }
     }
 
+    /**
+     * Mostra o topico com suas respostas
+     */
     def showTopico = {
         def topicoInstance = Topico.get(params.id)
         return [topicoInstance: topicoInstance]
     }
 
+    /**
+     * Inicializa a criacao de uma nova resposta para o topico
+     */
     def responderTopico = {
         def topicoInstance = Topico.get(params.id)
         def mensagemInstance = new Mensagem()
         return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance]
     }
 
+    /**
+     * Salva uma nova resposta
+     */
     def saveResposta = {
         def topicoInstance = Topico.get(params.id)
-        def mensagemInstance = new Mensagem(params)
+        def mensagemInstance = new Mensagem()
+        mensagemInstance.texto = params.texto
         if (debateService.save(topicoInstance, mensagemInstance)) {
             flash.message = "${message(code: 'salvoSucesso')}"
             redirect(action: "showTopico", id: topicoInstance.id)
@@ -50,4 +73,19 @@ class DebateController {
         }
     }
 
+    /**
+     * Visualizacao de uma resposta ainda nao salva
+     */
+    def visualizar = {
+        def mensagemInstance = new Mensagem()
+        mensagemInstance.texto = params.texto
+        def topicoInstance = null
+        if(params.id) {
+            topicoInstance = Topico.get(params.id)
+            render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
+        } else {
+            topicoInstance = new Topico(params)
+            render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
+        }
+    }
 }
