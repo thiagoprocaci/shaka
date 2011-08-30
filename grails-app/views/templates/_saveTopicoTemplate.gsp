@@ -7,8 +7,8 @@
 </div>
  <div class="body">
      <h1><g:message code="novoTopico" /></h1>
-     <g:if test="${flash.message}">
-         <div class="message">${flash.message}</div>
+     <g:if test="${message}">
+         <div class="message">${message}</div>
      </g:if>
      <g:if test="${topicoInstance.hasErrors() || mensagemInstance.hasErrors()}">
          <div class="errors">
@@ -16,7 +16,7 @@
              <g:renderErrors bean="${mensagemInstance}" as="list" />
            </div>
      </g:if>
-     <g:form action="saveTopico" >
+     <g:form>
          <div class="dialog">
              <table>
                  <tbody>
@@ -27,7 +27,13 @@
                              </label>
                          </td>
                          <td valign="top" class="value ${hasErrors(bean: topicoInstance, field: 'titulo', 'errors')}">
-                             <g:textField name="titulo" value="${topicoInstance?.titulo}" style="width:650px" maxlength="100" />
+                             <g:if test="${topicoInstance.id == null}">
+                             	<g:textField name="titulo" value="${topicoInstance?.titulo}" style="width:650px" maxlength="100" />
+                             </g:if>
+                             <g:if test="${topicoInstance.id != null}">
+                             	${fieldValue(bean: topicoInstance, field: "titulo")}
+                             	<g:hiddenField name="id" value="${topicoInstance.id}"/>
+                             </g:if>
                          </td>
                      </tr>
                      <tr class="prop">
@@ -47,7 +53,7 @@
          </div>
          <div class="buttons">
              <span class="button">
-                 <g:submitButton name="salvar" class="save" value="${message(code: 'salvar')}" />
+                 <g:actionSubmit class="save" action="${action}" value="${message(code: 'salvar')}" />
              </span>
          </div>
      </g:form>
