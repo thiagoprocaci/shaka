@@ -2,9 +2,7 @@ package com.shaka
 
 
 /**
- *
  * Controller para manipular uma debate (topico + mensagens)
- *
  */
 class DebateController {
 
@@ -24,20 +22,22 @@ class DebateController {
     def createTopico = {
         def topico = new Topico()
         def mensagem = new Mensagem()
-        return [topicoInstance:topico, mensagemInstance:mensagem]
+        return [topicoInstance:topico, mensagemInstance:mensagem, forumId:params.id]
     }
 
     /**
      * Salva um novo topico
      */
     def saveTopico = {
+        def forum = Forum.get(params.forumId)
         def topicoInstance = new Topico(params)
         def mensagemInstance = new Mensagem(params)
+        topicoInstance.forum = forum
         if (debateService.save(topicoInstance, mensagemInstance)) {
             flash.message = "${message(code: 'salvoSucesso')}"
             redirect(action: "showTopico", id: topicoInstance.id)
         } else {
-            render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance])
+            render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance, forumId:params.forumId])
         }
     }
 
@@ -85,7 +85,14 @@ class DebateController {
             render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
         } else {
             topicoInstance = new Topico(params)
-            render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
+            render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true, forumId:params.forumId])
         }
+    }
+
+    /**
+     * Mostra o forum
+     */
+    def showForum = {
+        redirect(controller:"forum" , action: "detail", params: ['id':params.forumId])
     }
 }

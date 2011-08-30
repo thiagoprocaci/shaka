@@ -9,9 +9,12 @@
 <body>
     <g:formularioSaveTopico saveAction="saveResposta"
         visualizarAction="visualizar"
+        voltarAction="showTopico"
         mensagemInstance="${mensagemInstance}"
         topicoInstance="${topicoInstance}"
         message="${flash.message}" />
+
+
 
 </body>
 </html>

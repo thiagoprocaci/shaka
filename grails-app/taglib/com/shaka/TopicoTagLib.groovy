@@ -14,6 +14,7 @@ class TopicoTagLib {
         out << render(template:"/templates/saveTopicoTemplate",
             model:[topicoInstance:attrs.topicoInstance, mensagemInstance:attrs.mensagemInstance,
                  saveAction:attrs.saveAction, visualizarAction:attrs.visualizarAction,
+                 voltarAction:attrs.voltarAction,
                 , message: attrs.message])
     }
 

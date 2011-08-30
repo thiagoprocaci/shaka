@@ -5,6 +5,7 @@ class Topico {
     Date dateCreated
 
     static hasMany = [mensagemList:Mensagem]
+    static belongsTo = [forum:Forum]
 
     static constraints = { titulo(blank:false) }
 

@@ -52,6 +52,9 @@
                                  ${fieldValue(bean: topicoInstance, field: "titulo")}
                                  <g:hiddenField name="id" value="${topicoInstance.id}"/>
                              </g:if>
+                             <g:if test="${forumId != null}">
+                                 <g:hiddenField name="forumId" value="${forumId}"/>
+                             </g:if>
                          </td>
                      </tr>
                      <tr class="prop">
@@ -73,6 +76,7 @@
              <span class="button">
                  <g:actionSubmit class="save" action="${saveAction}" value="${message(code: 'salvar')}" />
                  <g:actionSubmit class="edit" action="${visualizarAction}" value="${message(code: 'visualizar')}" />
+                 <g:actionSubmit class="edit" action="${voltarAction}" value="${message(code: 'voltar')}" />
              </span>
          </div>
          <g:if test="${topicoInstance.id != null}">

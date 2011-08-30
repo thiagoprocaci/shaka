@@ -2,6 +2,7 @@ package com.shaka.service
 
 import grails.test.*
 
+import com.shaka.Forum
 import com.shaka.Mensagem
 import com.shaka.Topico
 import com.shaka.business.DebateService
@@ -18,6 +19,7 @@ class DebateServiceTests extends GrailsUnitTestCase {
         debateService = new DebateService()
         mockDomain(Topico)
         mockDomain(Mensagem)
+        mockDomain(Forum)
         textValidationService = mockFor(TextValidationService)
         debateService.textValidationService = textValidationService.createMock()
     }
@@ -72,8 +74,10 @@ class DebateServiceTests extends GrailsUnitTestCase {
     }
 
     void testSaveTextoBranco() {
+        def forum = new Forum()
         def topico = new Topico()
         def mensagem = new Mensagem()
+        topico.forum = forum
         topico.titulo = "a"
         textValidationService.demand.hasTextInHtml() { texto ->
             return false
@@ -86,8 +90,10 @@ class DebateServiceTests extends GrailsUnitTestCase {
     }
 
     void testSaveCodigoMalicioso(){
+        def forum = new Forum()
         def topico = new Topico()
         def mensagem = new Mensagem()
+        topico.forum = forum
         topico.titulo = "a"
         mensagem.texto = "a"
         textValidationService.demand.hasTextInHtml() { texto ->
@@ -104,8 +110,10 @@ class DebateServiceTests extends GrailsUnitTestCase {
     }
 
     void testSaveSucesso(){
+        def forum = new Forum()
         def topico = new Topico()
         def mensagem = new Mensagem()
+        topico.forum = forum
         topico.titulo = "a"
         mensagem.texto = "a"
         textValidationService.demand.hasTextInHtml() { texto ->

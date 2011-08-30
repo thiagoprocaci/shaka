@@ -92,13 +92,8 @@
                 <h2><g:message code="topicos" /> </h2>
                 <ul>
                     <li class="controller">
-                          <g:link controller="debate" action="index" ><g:message code="novoTopico" /></g:link>
-                        </li>
-                    <g:each var="t" in="${Topico.list()}">
-                        <li class="controller">
-                          <g:link controller="debate" action="showTopico" id="${t.id}">${t.titulo}</g:link>
-                        </li>
-                    </g:each>
+                        <g:link controller="forum" action="index" ><g:message code="foruns" /></g:link>
+                    </li>
                 </ul>
             </div>
         </div>
