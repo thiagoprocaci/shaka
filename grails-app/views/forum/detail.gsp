@@ -17,47 +17,53 @@
         <div class="body">
             <h1>${fieldValue(bean: forumInstance, field: "nome")}</h1>
             <br />
-            <div class="list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                <g:message code="nomeTopico"/>
-                            </th>
-                            <th>
-                                <g:message code="respostas"/>
-                            </th>
-                            <th>
-                                <g:message code="visitas"/>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <g:if test="${Boolean.FALSE.equals(forumInstance.topicoList.isEmpty())}">
-                              <g:each var="t" in="${forumInstance?.topicoList}" status="i">
-                                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                                    <td>
-                                        <g:link controller="debate" action="showTopico"  id="${t.id}">${t.titulo}</g:link>
-                                    </td>
-                                    <td>
-                                        ${Mensagem.countByTopico(t)}
-                                    </td>
-                                    <td>
-                                        ${fieldValue(bean: t, field: "numeroVisitas")}
-                                    </td>
-                                </tr>
-                            </g:each>
-                      </g:if>
-                    </tbody>
-                </table>
-            </div>
-            <div class="buttons">
+            <g:if test="${forumInstance?.topicoList?.isEmpty()}">
+                <div class="dialog">
+                    <g:message code="forumSemTopico" />
+                    <br /><br />
+                </div>
+            </g:if>
+            <g:if test="${!forumInstance?.topicoList?.isEmpty()}">
+                <div class="list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <g:message code="nomeTopico"/>
+                                </th>
+                                <th>
+                                    <g:message code="respostas"/>
+                                </th>
+                                <th>
+                                    <g:message code="visitas"/>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <g:each var="t" in="${forumInstance?.topicoList}" status="i">
+                             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                                 <td>
+                                     <g:link controller="debate" action="showTopico"  id="${t.id}">${t.titulo}</g:link>
+                                 </td>
+                                 <td>
+                                     ${Mensagem.countByTopico(t)}
+                                 </td>
+                                 <td>
+                                     ${fieldValue(bean: t, field: "numeroVisitas")}
+                                 </td>
+                             </tr>
+                           </g:each>
+                        </tbody>
+                    </table>
+                  </div>
+              </g:if>
+              <div class="buttons">
                  <span class="button">
                      <g:link class="edit" controller="debate" action="index" id="${forumInstance.id}" ><g:message code="novoTopico" /></g:link>
                      <g:link class="edit" controller="forum" action="list" >${message(code: 'voltar')}</g:link>
                      <input type="button" class="edit" style="display:none">
                  </span>
-            </div>
+              </div>
         </div>
 
     </body>
