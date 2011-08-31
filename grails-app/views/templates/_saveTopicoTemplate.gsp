@@ -33,7 +33,12 @@
             </div>
 
      </g:if>
-     <h1><g:message code="novoTopico" /></h1>
+     <g:if test="${topicoInstance.id == null}">
+     	<h1><g:message code="novoTopico" /></h1>
+     </g:if>
+     <g:if test="${topicoInstance.id != null}">
+     	<h1><g:message code="responderA" args="${[topicoInstance.titulo]}" /></h1>
+     </g:if>
      <g:form>
          <div class="dialog">
              <table>

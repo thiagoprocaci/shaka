@@ -1,4 +1,4 @@
-<div class="list">
+<div class="historicoMensagemList">
      <table>
         <tbody>
              <g:each in="${mensagemList}" var="m" status="i">
