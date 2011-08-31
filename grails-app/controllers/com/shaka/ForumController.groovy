@@ -15,6 +15,10 @@ class ForumController {
 
     def detail = {
         def forum = Forum.get(params.id)
-        return [forumInstance:forum]
+        if(forum){
+            return [forumInstance:forum]
+        } else {
+            redirect(uri:"/")
+        }
     }
 }

@@ -19,7 +19,7 @@
      </g:if>
      <g:if test="${visualizar}">
              <h1><g:message code="visualizacao" /></h1>
-             <h1>${fieldValue(bean: topicoInstance, field: "titulo")}</h1>
+             <h2>${fieldValue(bean: topicoInstance, field: "titulo")}</h2>
              <div class="list">
                 <table>
                    <tbody>
@@ -31,13 +31,13 @@
                     </tbody>
                 </table>
             </div>
-
+     <hr></hr>
      </g:if>
      <g:if test="${topicoInstance.id == null}">
-     	<h1><g:message code="novoTopico" /></h1>
+         <h1><g:message code="novoTopico" /></h1>
      </g:if>
      <g:if test="${topicoInstance.id != null}">
-     	<h1><g:message code="responderA" args="${[topicoInstance.titulo]}" /></h1>
+         <h1><g:message code="responderA" args="${[topicoInstance.titulo]}" /></h1>
      </g:if>
      <g:form>
          <div class="dialog">
@@ -81,11 +81,17 @@
              <span class="button">
                  <g:actionSubmit class="save" action="${saveAction}" value="${message(code: 'salvar')}" />
                  <g:actionSubmit class="edit" action="${visualizarAction}" value="${message(code: 'visualizar')}" />
-                 <g:actionSubmit class="edit" action="${voltarAction}" value="${message(code: 'voltar')}" />
+                 <g:if test="${topicoInstance.id == null}">
+                     <g:link class="edit" controller="forum" action="detail" id="${forumId}">${message(code: 'voltar')}</g:link>
+                 </g:if>
+                 <g:if test="${topicoInstance.id != null}">
+                      <g:link class="edit" controller="debate" action="showTopico" id="${topicoInstance.id}">${message(code: 'voltar')}</g:link>
+                 </g:if>
              </span>
          </div>
          <g:if test="${topicoInstance.id != null}">
-             <h1><g:message code="historicoMensagens"/></h1>
+             <hr></hr>
+             <h2><g:message code="historicoMensagens"/></h2>
              <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}"/>
          </g:if>
      </g:form>

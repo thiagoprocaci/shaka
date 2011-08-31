@@ -35,4 +35,18 @@ class DebateService {
         }
         return false
     }
+
+    /**
+     * Incrementa contador de visitas do topico
+     * @param id id do topico
+     * @return topico atualizado
+     */
+    def visitarTopico(def id) {
+        Topico topico = Topico.get(id)
+        if(topico) {
+            topico.numeroVisitas++
+            return topico.save()
+        }
+        return null
+    }
 }

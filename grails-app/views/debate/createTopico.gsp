@@ -9,7 +9,6 @@
     <body>
         <g:formularioSaveTopico saveAction="saveTopico"
                 visualizarAction="visualizar"
-                voltarAction="showForum"
                 mensagemInstance="${mensagemInstance}"
                 topicoInstance="${topicoInstance}"
                 message="${flash.message}" />

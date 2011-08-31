@@ -33,6 +33,18 @@ h1 {
     margin: .8em 0 .3em 0;
 }
 
+h2 {
+    color: #48802c;
+    font-weight: normal;
+    font-size: 13px;
+    margin: .8em 0 .3em 0;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 ul {
     padding-left: 15px;
 }
@@ -259,7 +271,7 @@ th.desc a {
     padding: 0;
 }
 
-.buttons input {
+.buttons input, .buttons a {
     background: #fff;
     border: 0;
     color: #333;
@@ -270,11 +282,19 @@ th.desc a {
     overflow: visible;
     padding: 2px 6px;
 }
+
+.buttons a {
+    margin-left: 3px;
+    margin-top: 2px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    display: inline-block;
+}
 .buttons input.delete {
     background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
-.buttons input.edit {
+.buttons input.edit, .buttons a.edit {
     background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
@@ -282,3 +302,4 @@ th.desc a {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+

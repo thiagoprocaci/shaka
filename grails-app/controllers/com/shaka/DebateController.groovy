@@ -30,14 +30,18 @@ class DebateController {
      */
     def saveTopico = {
         def forum = Forum.get(params.forumId)
-        def topicoInstance = new Topico(params)
-        def mensagemInstance = new Mensagem(params)
-        topicoInstance.forum = forum
-        if (debateService.save(topicoInstance, mensagemInstance)) {
-            flash.message = "${message(code: 'salvoSucesso')}"
-            redirect(action: "showTopico", id: topicoInstance.id)
+        if(forum){
+            def topicoInstance = new Topico(params)
+            def mensagemInstance = new Mensagem(params)
+            topicoInstance.forum = forum
+            if (debateService.save(topicoInstance, mensagemInstance)) {
+                flash.message = "${message(code: 'salvoSucesso')}"
+                redirect(action: "showTopico", id: topicoInstance.id)
+            } else {
+                render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance, forumId:params.forumId])
+            }
         } else {
-            render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance, forumId:params.forumId])
+            redirect(uri:"/")
         }
     }
 
@@ -45,8 +49,12 @@ class DebateController {
      * Mostra o topico com suas respostas
      */
     def showTopico = {
-        def topicoInstance = Topico.get(params.id)
-        return [topicoInstance: topicoInstance]
+        def topicoInstance = debateService.visitarTopico(params.id)
+        if(topicoInstance){
+            return [topicoInstance: topicoInstance]
+        } else {
+            redirect(uri:"/")
+        }
     }
 
     /**
@@ -54,8 +62,12 @@ class DebateController {
      */
     def responderTopico = {
         def topicoInstance = Topico.get(params.id)
-        def mensagemInstance = new Mensagem()
-        return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance]
+        if(topicoInstance){
+            def mensagemInstance = new Mensagem()
+            return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance]
+        } else {
+            redirect(uri:"/")
+        }
     }
 
     /**
@@ -63,13 +75,17 @@ class DebateController {
      */
     def saveResposta = {
         def topicoInstance = Topico.get(params.id)
-        def mensagemInstance = new Mensagem()
-        mensagemInstance.texto = params.texto
-        if (debateService.save(topicoInstance, mensagemInstance)) {
-            flash.message = "${message(code: 'salvoSucesso')}"
-            redirect(action: "showTopico", id: topicoInstance.id)
+        if(topicoInstance) {
+            def mensagemInstance = new Mensagem()
+            mensagemInstance.texto = params.texto
+            if (debateService.save(topicoInstance, mensagemInstance)) {
+                flash.message = "${message(code: 'salvoSucesso')}"
+                redirect(action: "showTopico", id: topicoInstance.id)
+            } else {
+                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance])
+            }
         } else {
-            render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance])
+            redirect(uri:"/")
         }
     }
 
@@ -82,17 +98,15 @@ class DebateController {
         def topicoInstance = null
         if(params.id) {
             topicoInstance = Topico.get(params.id)
-            render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
+            if(topicoInstance){
+                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
+            } else {
+                redirect(uri:"/")
+            }
         } else {
             topicoInstance = new Topico(params)
             render(view: "createTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true, forumId:params.forumId])
         }
     }
 
-    /**
-     * Mostra o forum
-     */
-    def showForum = {
-        redirect(controller:"forum" , action: "detail", params: ['id':params.forumId])
-    }
 }

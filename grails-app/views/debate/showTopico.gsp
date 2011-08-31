@@ -24,6 +24,7 @@
                     <g:hiddenField name="id" value="${topicoInstance?.id}" />
                     <span class="button">
                          <g:actionSubmit class="edit" action="responderTopico" value="${message(code: 'responder')}" />
+                         <g:link class="edit" controller="forum" action="detail" id="${topicoInstance.forum.id}">${message(code: 'voltar')}</g:link>
                     </span>
                 </g:form>
             </div>
