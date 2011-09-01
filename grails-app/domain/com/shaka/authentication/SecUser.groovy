@@ -26,6 +26,7 @@ class SecUser {
 
     def beforeInsert() {
         encodePassword()
+        enabled = true
     }
 
     /*def beforeUpdate() {

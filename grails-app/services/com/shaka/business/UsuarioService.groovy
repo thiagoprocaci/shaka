@@ -76,7 +76,7 @@ class UsuarioService {
                 // apaga a imagem antiga caso exista
                 imageService.deleteImage(diretorioImagem, usuario.pathImagem)
             }
-            def nome = "imagem_" + usuario.id
+            def nome = "imagem_" + usuario.id + nomeImagem
             imageService.saveImage(diretorioImagem,nome,imagem)
             usuario.pathImagem = nome
         }
