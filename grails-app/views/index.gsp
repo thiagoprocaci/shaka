@@ -89,12 +89,8 @@
             click on each to execute its default action:</p>
 
             <div id="controllerList" class="dialog">
-                <h2><g:message code="topicos" /> </h2>
-                <ul>
-                    <li class="controller">
-                        <g:link controller="forum" action="index" ><g:message code="foruns" /></g:link>
-                    </li>
-                </ul>
+                <h2><g:link controller="forum" action="index" ><g:message code="foruns" /></g:link> </h2>
+
             </div>
         </div>
     </body>

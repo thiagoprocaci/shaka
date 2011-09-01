@@ -49,7 +49,7 @@
                                     ${Mensagem.countByForum(f)}
                                  </td>
                                  <td>
-                                    ${Mensagem.getLast(f)}
+                                     <g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${Mensagem.getLast(f)?.dateCreated}"/>
                                  </td>
                              </tr>
                            </g:each>

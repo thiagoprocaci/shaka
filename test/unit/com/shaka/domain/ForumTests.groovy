@@ -1,8 +1,8 @@
-package com.shaka
+package com.shaka.domain
 
 import grails.test.*
 
-class TopicoControllerTests extends ControllerUnitTestCase {
+class ForumTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

@@ -36,13 +36,16 @@ class Mensagem {
      */
     def static getLast = { forum ->
         def criteria = Mensagem.createCriteria()
-        def mensagem = criteria.list {
-
-            max:1
-            offset:0
-            sort:"dateCreated"
-            order:"desc"
+        def mensagemList = criteria.list {
+            topico {
+                eq('forum',forum)
+            }
+            order("dateCreated","desc")
+            maxResults(1)
         }
-        return mensagem
+        if(mensagemList != null && !mensagemList.isEmpty()){
+            return mensagemList.get(0)
+        }
+        return null
     }
 }

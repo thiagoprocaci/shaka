@@ -19,6 +19,6 @@ class Topico {
 
     def beforeInsert = {
         dateCreated = new Date()
-        numeroVisitas = 1L
+        numeroVisitas = 0L
     }
 }

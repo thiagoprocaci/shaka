@@ -42,6 +42,19 @@ class TextValidationService {
         // substituicao dos caracteres especiais para abrir e fechar tags
         def txt = htmlText.replace('&lt;', '<').replace('&gt;', '>')
         return txt.toLowerCase().contains('<script')
+    }
 
+    /**
+    * Verifica se existe css em um html
+    * @param htmlText texto html a ser validado
+    * @return Retorna true caso o parametro htmlText tenha css. Caso contrario false.
+    */
+    def hasCCSCodeinHtml(String htmlText) {
+        if(htmlText == null){
+            return  false
+        }
+        // substituicao dos caracteres especiais para abrir e fechar tags
+        def txt = htmlText.replace('&lt;', '<').replace('&gt;', '>')
+        return txt.toLowerCase().contains('<style')
     }
 }

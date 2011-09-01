@@ -24,7 +24,7 @@ class DebateService {
                 mensagem.texto = ''
             }
             if(topico.validate() & mensagem.validate()){
-                if(textValidationService.hasJSCodeinHtml(mensagem.texto)){
+                if(textValidationService.hasJSCodeinHtml(mensagem.texto) || textValidationService.hasCCSCodeinHtml(mensagem.texto)){
                     mensagem.errors.rejectValue "texto", "codigoMalicioso"
                     return false
                 }
