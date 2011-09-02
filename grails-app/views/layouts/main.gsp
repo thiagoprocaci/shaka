@@ -14,6 +14,12 @@
         <div id="grailsLogo">
             <a href="http://grails.org"><img src="${resource(dir:'images',file:'grails_logo.png')}" alt="Grails" border="0" /></a>
         </div>
+        <sec:ifLoggedIn>
+            <div>
+               <sec:username />
+               <g:link controller="logout"> <g:message code="sair" /></g:link>
+            </div>
+        </sec:ifLoggedIn>
         <g:layoutBody />
     </body>
 </html>

@@ -7,13 +7,7 @@
         <title><g:message code="shakaProject" /></title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton">
-                <a class="home" href="${createLink(uri: '/')}">
-                    <g:message code="home"/>
-                </a>
-            </span>
-        </div>
+        <g:menu/>
         <div class="body">
             <h1>${fieldValue(bean: forumInstance, field: "nome")}</h1>
             <br />
@@ -59,12 +53,14 @@
               </g:if>
               <div class="buttons">
                  <span class="button">
-                     <g:link class="edit" controller="debate" action="index" id="${forumInstance.id}" ><g:message code="novoTopico" /></g:link>
+                     <sec:ifLoggedIn>
+                         <g:link class="edit" controller="debate" action="index" id="${forumInstance.id}" >
+                             <g:message code="novoTopico" />
+                         </g:link>
+                     </sec:ifLoggedIn>
                      <g:link class="edit" controller="forum" action="list" >${message(code: 'voltar')}</g:link>
-                     <input type="button" class="edit" style="display:none">
                  </span>
               </div>
         </div>
-
     </body>
 </html>

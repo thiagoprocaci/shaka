@@ -1,12 +1,7 @@
 <%@ page import="org.springframework.util.StringUtils"%>
-
-<div class="nav">
-    <span class="menuButton">
-       <a class="home" href="${createLink(uri: '/')}">
-           <g:message code="home"/>
-       </a>
-    </span>
-</div>
+<%@ page import="com.shaka.Topico" %>
+<%@ page import="com.shaka.Mensagem" %>
+<g:menu/>
  <div class="body">
      <g:if test="${message}">
          <div class="message">${message}</div>
@@ -92,7 +87,7 @@
          <g:if test="${topicoInstance.id != null}">
              <hr></hr>
              <h2><g:message code="historicoMensagens"/></h2>
-             <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}"/>
+             <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}" diretorioImagem="${diretorioImagem}" />
          </g:if>
      </g:form>
 </div>

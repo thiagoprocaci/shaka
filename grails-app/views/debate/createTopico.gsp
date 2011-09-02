@@ -1,5 +1,3 @@
-<%@ page import="com.shaka.Topico" %>
-<%@ page import="com.shaka.Mensagem" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

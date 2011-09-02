@@ -1,15 +1,19 @@
 package com.shaka
 
-import java.util.Date;
+import java.util.Date
 
-import com.shaka.authentication.SecUser;
+import com.shaka.authentication.SecUser
 
 class Usuario extends SecUser{
+    //TODO mapear paginas de acesso no security
+
     String nome
     String email
     String assinatura
     Date dateCreated
     String pathImagem
+
+    static hasMany = [mensagemList:Mensagem, topicoList:Topico]
 
     static constraints = {
         email(unique:true, blank: false)

@@ -8,13 +8,7 @@
         <title><g:message code="shakaProject" /></title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton">
-                <a class="home" href="${createLink(uri: '/')}">
-                    <g:message code="home"/>
-                </a>
-            </span>
-        </div>
+        <g:menu/>
         <div class="body">
             <h1><g:message code="foruns" /></h1>
             <div class="list">
@@ -49,7 +43,10 @@
                                     ${Mensagem.countByForum(f)}
                                  </td>
                                  <td>
-                                     <g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${Mensagem.getLast(f)?.dateCreated}"/>
+                                    <g:set var="msg" value="${Mensagem.getLast(f)}" />
+                                    <g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${msg?.dateCreated}"/>
+                                    <br />
+                                    ${msg?.usuario?.nome}
                                  </td>
                              </tr>
                            </g:each>

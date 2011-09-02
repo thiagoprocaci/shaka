@@ -6,11 +6,13 @@ class Topico {
     Long numeroVisitas
 
     static hasMany = [mensagemList:Mensagem]
+    static hasOne = [usuario:Usuario]
     static belongsTo = [forum:Forum]
 
     static constraints = {
         titulo(blank:false)
         numeroVisitas (nullable:true)
+        usuario(nullable:true)
     }
 
     static mapping = {

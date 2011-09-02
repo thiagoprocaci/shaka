@@ -42,13 +42,14 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         assertFalse usuarioService.save(u, null, null)
         assertFalse u.errors.isEmpty()
         assertNull u.errors['pathImagem']
-		assertNotNull u.errors['nome']
+        assertNotNull u.errors['nome']
     }
 
     void testSaveUsuarioExtensaoInvalida() {
+        springSecurityService.demand.encodePassword("senha") { -> return "senha" }
         imageService.demand.extensaoValida() { nomeImagem -> return false }
         Usuario u = getUsuario()
-        u.id = 1
+        // u.id = 1 -- isDirty nao eh adicionado dinamicamente no mock GRAILS-7506
         byte[] content = "teste".getBytes()
         MultipartFile multipartFile = new MockMultipartFile("nome", content)
         assertFalse usuarioService.save(u, "nomeImagem", multipartFile)
@@ -56,10 +57,11 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
     }
 
     void testSaveUsuarioTamanhoImagemInvalida() {
+        springSecurityService.demand.encodePassword("senha") { -> return "senha" }
         imageService.demand.extensaoValida() { nomeImagem -> return true }
         imageService.demand.tamanhoImagemValido() { imagem, tamanhoMax -> return false }
         Usuario u = getUsuario()
-        u.id = 1
+        // u.id = 1 -- isDirty nao eh adicionado dinamicamente no mock GRAILS-7506
         byte[] content = "teste".getBytes()
         MultipartFile multipartFile = new MockMultipartFile("nome", content)
         assertFalse usuarioService.save(u, "nomeImagem", multipartFile)
@@ -67,12 +69,14 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
     }
 
     void testSaveUsuarioExtensaoSucesso() {
+        springSecurityService.demand.encodePassword("senha") { -> return "senha" }
+        springSecurityService.demand.reauthenticate() {usuario,senha ->  }
         imageService.demand.extensaoValida() { nomeImagem -> return true }
         imageService.demand.tamanhoImagemValido() { imagem, tamanhoMax -> return true }
         imageService.demand.deleteImage() { diretorio, nomeImagem -> }
         imageService.demand.saveImage() { diretorio, nomeImagem,imagem -> }
         Usuario u = getUsuario()
-        u.id = 1
+        // u.id = 1 -- isDirty nao eh adicionado dinamicamente no mock GRAILS-7506
         u.pathImagem = "teste"
         byte[] content = "teste".getBytes()
         MultipartFile multipartFile = new MockMultipartFile("nome", content)

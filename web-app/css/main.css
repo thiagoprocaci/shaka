@@ -4,7 +4,6 @@ html * {
 }
 
 /* GENERAL */
-
 .spinner {
     padding: 5px;
     position: absolute;
@@ -16,11 +15,12 @@ body {
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
 }
+
 #grailsLogo {
-    padding:20px;
+    padding: 20px;
 }
 
-a:link, a:visited, a:hover {
+a:link,a:visited,a:hover {
     color: #666;
     font-weight: bold;
     text-decoration: none;
@@ -49,34 +49,35 @@ ul {
     padding-left: 15px;
 }
 
-input, select, textarea {
+input,select,textarea {
     background-color: #fcfcfc;
     border: 1px solid #ccc;
     font: 11px verdana, arial, helvetica, sans-serif;
     margin: 2px 0;
     padding: 2px 4px;
 }
+
 select {
-   padding: 2px 2px 2px 0;
+    padding: 2px 2px 2px 0;
 }
+
 textarea {
     width: 250px;
     height: 150px;
     vertical-align: top;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,select:focus,textarea:focus {
     border: 1px solid #b2d1ff;
 }
 
 .body {
     float: left;
     margin: 0 15px 10px 15px;
-    width:1000px;
+    width: 1000px;
 }
 
 /* NAVIGATION MENU */
-
 .nav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
@@ -89,20 +90,24 @@ input:focus, select:focus, textarea:focus {
     font-size: 10px;
     padding: 0 5px;
 }
+
 .menuButton a {
     color: #333;
     padding: 4px 6px;
 }
+
 .menuButton a.home {
     background: url(../images/skin/house.png) center left no-repeat;
     color: #333;
     padding-left: 25px;
 }
+
 .menuButton a.list {
     background: url(../images/skin/database_table.png) center left no-repeat;
     color: #333;
     padding-left: 25px;
 }
+
 .menuButton a.create {
     background: url(../images/skin/database_add.png) center left no-repeat;
     color: #333;
@@ -110,9 +115,9 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* MESSAGES AND ERRORS */
-
 .message {
-    background: #f3f8fc url(../images/skin/information.png) 8px 50% no-repeat;
+    background: #f3f8fc url(../images/skin/information.png) 8px 50%
+        no-repeat;
     border: 1px solid #b2d1ff;
     color: #006dba;
     margin: 10px 0 5px 0;
@@ -126,10 +131,12 @@ div.errors {
     margin: 10px 0 5px 0;
     padding: 5px 0 5px 0;
 }
+
 div.errors ul {
     list-style: none;
     padding: 0;
 }
+
 div.errors li {
     background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
     line-height: 16px;
@@ -139,29 +146,33 @@ div.errors li {
 td.errors select {
     border: 1px solid red;
 }
+
 td.errors input {
     border: 1px solid red;
 }
+
 td.errors textarea {
     border: 1px solid red;
 }
 
 /* TABLES */
-
 table {
     border: 1px solid #ccc;
     width: 100%
 }
+
 tr {
     border: 0;
 }
-td, th {
+
+td,th {
     font: 11px verdana, arial, helvetica, sans-serif;
     line-height: 12px;
     padding: 5px 6px;
     text-align: left;
     vertical-align: top;
 }
+
 th {
     background: #fff url(../images/skin/shadow.jpg);
     color: #666;
@@ -170,20 +181,24 @@ th {
     line-height: 17px;
     padding: 2px 6px;
 }
-th a:link, th a:visited, th a:hover {
+
+th a:link,th a:visited,th a:hover {
     color: #333;
     display: block;
     font-size: 10px;
     text-decoration: none;
     width: 100%;
 }
-th.asc a, th.desc a {
+
+th.asc a,th.desc a {
     background-position: right;
     background-repeat: no-repeat;
 }
+
 th.asc a {
     background-image: url(../images/skin/sorted_asc.gif);
 }
+
 th.desc a {
     background-image: url(../images/skin/sorted_desc.gif);
 }
@@ -192,6 +207,7 @@ th.desc a {
     background: #f7f7f7;
     border: 1px solid #CCCCCC;
 }
+
 .even {
     background: #fff;
     border: 1px solid #CCCCCC;
@@ -201,24 +217,29 @@ th.desc a {
 .historicoMensagemList table {
     border-collapse: collapse;
 }
-.historicoMensagemList th, .historicoMensagemList td {
+
+.historicoMensagemList th,.historicoMensagemList td {
     border-left: 1px solid #ddd;
+}
+
+.usuarioTd {
+    width: 140px;
 }
 
 /* LIST */
-
 .list table {
     border-collapse: collapse;
 }
-.list th, .list td {
+
+.list th,.list td {
     border-left: 1px solid #ddd;
 }
-.list th:hover, .list tr:hover {
+
+.list th:hover,.list tr:hover {
     background: #b2d1ff;
 }
 
 /* PAGINATION */
-
 .paginateButtons {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
@@ -228,6 +249,7 @@ th.desc a {
     overflow: hidden;
     padding: 10px 3px;
 }
+
 .paginateButtons a {
     background: #fff;
     border: 1px solid #ccc;
@@ -236,12 +258,12 @@ th.desc a {
     margin: 0 3px;
     padding: 2px 6px;
 }
+
 .paginateButtons span {
     padding: 2px 3px;
 }
 
 /* DIALOG */
-
 .dialog table {
     padding: 5px 0;
 }
@@ -249,18 +271,19 @@ th.desc a {
 .prop {
     padding: 5px;
 }
+
 .prop .name {
     text-align: left;
     width: 15%;
     white-space: nowrap;
 }
+
 .prop .value {
     text-align: left;
     width: 85%;
 }
 
 /* ACTION BUTTONS */
-
 .buttons {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
@@ -271,7 +294,7 @@ th.desc a {
     padding: 0;
 }
 
-.buttons input, .buttons a {
+.buttons input,.buttons a {
     background: #fff;
     border: 0;
     color: #333;
@@ -290,16 +313,101 @@ th.desc a {
     margin-bottom: 2px;
     display: inline-block;
 }
+
 .buttons input.delete {
-    background: transparent url(../images/skin/database_delete.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-.buttons input.edit, .buttons a.edit {
-    background: transparent url(../images/skin/database_edit.png) 5px 50% no-repeat;
-    padding-left: 28px;
-}
-.buttons input.save {
-    background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
+    background: transparent url(../images/skin/database_delete.png) 5px 50%
+        no-repeat;
     padding-left: 28px;
 }
 
+.buttons input.edit,.buttons a.edit {
+    background: transparent url(../images/skin/database_edit.png) 5px 50%
+        no-repeat;
+    padding-left: 28px;
+}
+
+.buttons input.save {
+    background: transparent url(../images/skin/database_save.png) 5px 50%
+        no-repeat;
+    padding-left: 28px;
+}
+
+/* login */
+#login {
+    margin: 15px 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+#login .inner {
+    width: 340px;
+    padding-bottom: 6px;
+    margin: 60px auto;
+    text-align: left;
+    border: 1px solid #aab;
+    background-color: #f0f0fa;
+    -moz-box-shadow: 2px 2px 2px #eee;
+    -webkit-box-shadow: 2px 2px 2px #eee;
+    -khtml-box-shadow: 2px 2px 2px #eee;
+    box-shadow: 2px 2px 2px #eee;
+}
+
+#login .inner .fheader {
+    padding: 18px 26px 14px 26px;
+    background-color: #f7f7ff;
+    margin: 0px 0 14px 0;
+    color: #2e3741;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#login .inner .cssform p {
+    clear: left;
+    margin: 0;
+    padding: 4px 0 3px 0;
+    padding-left: 105px;
+    margin-bottom: 20px;
+    height: 1%;
+}
+
+#login .inner .cssform input[type='text'] {
+    width: 120px;
+}
+
+#login .inner .cssform label {
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    margin-left: -105px;
+    width: 110px;
+    padding-top: 3px;
+    padding-right: 10px;
+}
+
+#login #remember_me_holder {
+    padding-left: 120px;
+}
+
+#login #submit {
+    margin-left: 15px;
+}
+
+#login #remember_me_holder label {
+    float: none;
+    margin-left: 0;
+    text-align: left;
+    width: 200px
+}
+
+#login .inner .login_message {
+    padding: 6px 25px 20px 25px;
+    color: #c33;
+}
+
+#login .inner .text_ {
+    width: 120px;
+}
+
+#login .inner .chk {
+    height: 12px;
+}

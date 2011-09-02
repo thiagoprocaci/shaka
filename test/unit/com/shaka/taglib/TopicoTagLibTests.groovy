@@ -40,7 +40,7 @@ class TopicoTagLibTests extends TagLibUnitTestCase {
         assertNotNull tagLib.renderArgs.model.visualizarAction
         assertNotNull tagLib.renderArgs.model.message
 
-		assertEquals 5, tagLib.renderArgs.model.size()
+        assertEquals 5, tagLib.renderArgs.model.size()
         assertEquals "/templates/saveTopicoTemplate", tagLib.renderArgs.template
         assertEquals topicoInstance, tagLib.renderArgs.model.topicoInstance
         assertEquals mensagemInstance, tagLib.renderArgs.model.mensagemInstance
@@ -51,15 +51,20 @@ class TopicoTagLibTests extends TagLibUnitTestCase {
 
     void testHistoricoMensagens() {
          def mensagemList = ["a", "b"]
-         def attrs = [mensagemList: mensagemList]
+         def diretorioImagem = "abc"
+         def attrs = [mensagemList: mensagemList, diretorioImagem:diretorioImagem]
          tagLib.historicoMensagens(attrs)
          assertNotNull tagLib.renderArgs
          assertNotNull tagLib.renderArgs.template
          assertNotNull tagLib.renderArgs.model
          assertNotNull tagLib.renderArgs.model.mensagemList
+         assertNotNull tagLib.renderArgs.model.diretorioImagem
 
-		 assertEquals 1, tagLib.renderArgs.model.size()
+
+
+         assertEquals 2, tagLib.renderArgs.model.size()
          assertEquals "/templates/historicoMensagemTemplate", tagLib.renderArgs.template
          assertEquals mensagemList, tagLib.renderArgs.model.mensagemList
+         assertEquals diretorioImagem, tagLib.renderArgs.model.diretorioImagem
     }
 }

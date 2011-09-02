@@ -7,8 +7,12 @@ class Mensagem {
     Date dateCreated
 
     static belongsTo = [topico:Topico]
+    static hasOne = [usuario:Usuario]
 
-    static constraints = { texto(blank:false) }
+    static constraints = {
+        texto blank:false
+        usuario nullable:true
+    }
 
     static mapping = { texto type: 'text' }
 

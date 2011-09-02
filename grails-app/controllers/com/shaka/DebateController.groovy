@@ -11,6 +11,7 @@ class DebateController {
     static allowedMethods = [saveTopico: "POST", saveResposta: "POST"]
 
     def debateService
+    def usuarioService
 
     def index = {
         redirect(action: "createTopico", params: params)
@@ -51,7 +52,7 @@ class DebateController {
     def showTopico = {
         def topicoInstance = debateService.visitarTopico(params.id)
         if(topicoInstance){
-            return [topicoInstance: topicoInstance]
+            return [topicoInstance: topicoInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
         } else {
             redirect(uri:"/")
         }
@@ -64,7 +65,7 @@ class DebateController {
         def topicoInstance = Topico.get(params.id)
         if(topicoInstance){
             def mensagemInstance = new Mensagem()
-            return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance]
+            return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
         } else {
             redirect(uri:"/")
         }
@@ -99,7 +100,7 @@ class DebateController {
         if(params.id) {
             topicoInstance = Topico.get(params.id)
             if(topicoInstance){
-                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true])
+                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true, diretorioImagem : usuarioService.diretorioImagemRelativo])
             } else {
                 redirect(uri:"/")
             }

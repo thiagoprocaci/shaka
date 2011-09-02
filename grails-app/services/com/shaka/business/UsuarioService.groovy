@@ -37,10 +37,19 @@ class UsuarioService {
      * @return Retorna true caso seja bem sucedida a atualizacao
      */
     public boolean save(Usuario usuario, String nomeImagem, MultipartFile imagem){
-        if(usuario == null){
+        if(usuario == null) {
             return false
         }
-        return  !usuario.hasErrors() && usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
+        def password = null
+        if(usuario.id == null) {
+           // logica somente para autentica o usuario no primeiro acesso
+           password = usuario.password
+        }
+        def saved = !usuario.hasErrors() && usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
+        if(saved && password != null) {
+            springSecurityService.reauthenticate(usuario.username, password)
+        }
+        return saved
     }
 
     /**
@@ -63,6 +72,7 @@ class UsuarioService {
                 // apaga a imagem antiga caso exista
                 imageService.deleteImage(diretorioImagem, usuario.pathImagem)
             }
+            // TODO criar hash para o nome do arquivo
             def nome = "imagem_" + usuario.id + nomeImagem
             imageService.saveImage(diretorioImagem,nome,imagem)
             usuario.pathImagem = nome
