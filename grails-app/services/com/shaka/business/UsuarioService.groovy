@@ -4,6 +4,11 @@ import org.springframework.web.multipart.MultipartFile
 
 import com.shaka.Usuario
 
+/**
+ *
+ * Servicos de usuario
+ *
+ */
 class UsuarioService {
     static transactional = true
     String diretorioImagem
@@ -35,25 +40,7 @@ class UsuarioService {
         if(usuario == null){
             return false
         }
-        def saved =  !usuario.hasErrors() && usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
-        return saved
-    }
-    /**
-     * Cria novo usuario e autentica o mesmo no sistema.
-     * Metodo usado durante o cadastro de usuario
-     * @param usuario usuario a ser salvo
-     * @return Retorna true caso o usuario seja salvo com sucesso. Caso contrario false.
-     */
-    public boolean create(Usuario usuario) {
-        // TODO criar um servico de email para notificar o usuario
-        if (usuario != null && usuario.validate()) {
-            String password = usuario.password
-            // usuario.password = springSecurityService.encodePassword(usuario.password)
-            usuario.save()
-            springSecurityService.reauthenticate(usuario.username, password)
-            return true
-        }
-        return false
+        return  !usuario.hasErrors() && usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
     }
 
     /**

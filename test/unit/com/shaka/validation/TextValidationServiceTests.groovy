@@ -58,4 +58,24 @@ class TextValidationServiceTests extends GrailsUnitTestCase {
         assertFalse(textValidationService.hasJSCodeinHtml(htmlText))
 
     }
+
+	void testHasCSSCodeinHtml(){
+		assertFalse(textValidationService.hasJSCodeinHtml(null))
+
+		def htmlText = "<html><body><br /> </body></html> <style > <style />"
+		assertTrue(textValidationService.hasCCSCodeinHtml(htmlText))
+
+		htmlText = "<html><body><br /> </body></html> <styLe > <style />"
+		assertTrue(textValidationService.hasCCSCodeinHtml(htmlText))
+
+		htmlText = "<html><body><br /> </body></html> <stylE > "
+		assertTrue(textValidationService.hasCCSCodeinHtml(htmlText))
+
+		htmlText = "<html><body><br /> </body></html> &lt;Style > "
+		assertTrue(textValidationService.hasCCSCodeinHtml(htmlText))
+
+		htmlText = "<html><body><br /> </body></html> "
+		assertFalse(textValidationService.hasCCSCodeinHtml(htmlText))
+
+	}
 }

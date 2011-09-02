@@ -89,7 +89,7 @@ class DebateServiceTests extends GrailsUnitTestCase {
         assertEquals "blank", mensagem.errors['texto']
     }
 
-    void testSaveCodigoMalicioso(){
+    void testSaveCodigoJSMalicioso(){
         def forum = new Forum()
         def topico = new Topico()
         def mensagem = new Mensagem()
@@ -109,6 +109,29 @@ class DebateServiceTests extends GrailsUnitTestCase {
         assertEquals "codigoMalicioso", mensagem.errors['texto']
     }
 
+	void testSaveCodigoCSSMalicioso(){
+		def forum = new Forum()
+		def topico = new Topico()
+		def mensagem = new Mensagem()
+		topico.forum = forum
+		topico.titulo = "a"
+		mensagem.texto = "a"
+		textValidationService.demand.hasTextInHtml() { texto ->
+			return true
+		}
+		textValidationService.demand.hasJSCodeinHtml() { text ->
+			return false
+		}
+		textValidationService.demand.hasCCSCodeinHtml() { txt ->
+			return true
+		}
+		assertFalse(debateService.save(topico,mensagem))
+		assertFalse mensagem.errors.isEmpty()
+		assertTrue topico.errors.isEmpty()
+		assertNotNull mensagem.errors['texto']
+		assertEquals "codigoMalicioso", mensagem.errors['texto']
+	}
+
     void testSaveSucesso(){
         def forum = new Forum()
         def topico = new Topico()
@@ -122,6 +145,9 @@ class DebateServiceTests extends GrailsUnitTestCase {
         textValidationService.demand.hasJSCodeinHtml() { texto ->
             return false
         }
+		textValidationService.demand.hasCCSCodeinHtml() { texto ->
+			return false
+		}
         assertTrue(debateService.save(topico,mensagem))
         assertTrue mensagem.errors.isEmpty()
         assertTrue topico.errors.isEmpty()
@@ -129,4 +155,24 @@ class DebateServiceTests extends GrailsUnitTestCase {
         assertNotNull mensagem.id
         assertEquals mensagem.topico, topico
     }
+
+	void testVisitarTopicoErro() {
+		assertNull(debateService.visitarTopico(1))
+	}
+
+	void testVisitarTopicoSucesso() {
+		def forum = new Forum()
+		def topico = new Topico()
+		topico.titulo = 'titulo'
+		topico.forum = forum
+		topico.save()
+
+		Topico t = debateService.visitarTopico(topico.id)
+		assertEquals(topico, t)
+		assertEquals(1,t.numeroVisitas)
+
+		t = debateService.visitarTopico(topico.id)
+		assertEquals(topico, t)
+		assertEquals(2,t.numeroVisitas)
+	}
 }

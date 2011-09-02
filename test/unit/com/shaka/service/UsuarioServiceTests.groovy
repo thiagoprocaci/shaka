@@ -24,20 +24,6 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testCreateErro() {
-        assertFalse usuarioService.create(null)
-        assertFalse usuarioService.create(new Usuario())
-    }
-
-    void testCreateSucesso(){
-        Usuario usuario = getUsuario()
-        springSecurityService.demand.encodePassword("senha") { -> return "senha" }
-        springSecurityService.demand.reauthenticate("username","senha") {
-            ->
-        }
-        assertTrue usuarioService.create(usuario)
-    }
-
     void testGetCurrentUserSucesso(){
         springSecurityService.demand.encodePassword("senha") { -> return "senha" }
         Usuario u = getUsuario()
@@ -56,7 +42,7 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         assertFalse usuarioService.save(u, null, null)
         assertFalse u.errors.isEmpty()
         assertNull u.errors['pathImagem']
-
+		assertNotNull u.errors['nome']
     }
 
     void testSaveUsuarioExtensaoInvalida() {
@@ -83,12 +69,8 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
     void testSaveUsuarioExtensaoSucesso() {
         imageService.demand.extensaoValida() { nomeImagem -> return true }
         imageService.demand.tamanhoImagemValido() { imagem, tamanhoMax -> return true }
-        imageService.demand.deleteImage() { diretorio, nomeImagem ->
-
-        }
-        imageService.demand.saveImage() { diretorio, nomeImagem,imagem ->
-
-        }
+        imageService.demand.deleteImage() { diretorio, nomeImagem -> }
+        imageService.demand.saveImage() { diretorio, nomeImagem,imagem -> }
         Usuario u = getUsuario()
         u.id = 1
         u.pathImagem = "teste"
@@ -108,8 +90,7 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
     }
 
     private Usuario getUsuario(){
-        Usuario u = new Usuario(username : "username", email : "teste@teste.com", password: "senha",
-                nome:"nome")
+        Usuario u = new Usuario(username : "username", email : "teste@teste.com", password: "senha", nome:"nome")
         u.springSecurityService = springSecurityService.createMock()
         return u
     }
