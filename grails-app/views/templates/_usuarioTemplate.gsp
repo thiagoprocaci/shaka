@@ -40,7 +40,7 @@
                             <label for="nome"><g:message code="nome"  /></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'nome', 'errors')}">
-                            <g:textField name="nome" value="${usuarioInstance?.nome}" />
+                            <g:textField name="nome" value="${usuarioInstance?.nome}" maxlength="255" />
                         </td>
                     </tr>
 
@@ -49,7 +49,12 @@
                             <label for="username"><g:message code="login"  /></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'username', 'errors')}">
-                            <g:textField name="username" value="${usuarioInstance?.username}" />
+                            <g:if test="${usuarioInstance.id == null}">
+                            	<g:textField name="username" value="${usuarioInstance?.username}" maxlength="255" />
+                            </g:if>
+                            <g:if test="${usuarioInstance.id != null}">
+                            	${usuarioInstance?.username}
+                            </g:if>
                         </td>
                     </tr>
 
@@ -58,18 +63,28 @@
                             <label for="email"><g:message code="email"  /></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'email', 'errors')}">
-                            <g:textField name="email" value="${usuarioInstance?.email}" />
+                            <g:textField name="email" value="${usuarioInstance?.email}" maxlength="255" />
                         </td>
                     </tr>
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="password"><g:message code="senha"  /></label>
+                            <label for="senha"><g:message code="senha"  /></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'password', 'errors')}">
-                            <g:passwordField name="password" value="${usuarioInstance?.password}" />
+                            <g:passwordField name="senha" value="" maxlength="255" />
                         </td>
                     </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name">
+                            <label for="confirmacaoSenha"><g:message code="confirmacaoSenha"  /></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'password', 'errors')}">
+                            <g:passwordField name="confirmacaoSenha" value="" maxlength="255" />
+                        </td>
+                    </tr>
+
 
                     <tr class="prop">
                         <td valign="top" class="name">

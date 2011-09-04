@@ -16,7 +16,7 @@ class Usuario extends SecUser{
     static hasMany = [mensagemList:Mensagem, topicoList:Topico]
 
     static constraints = {
-        email(unique:true, blank: false)
+        email(unique:true, blank: false, email:true)
         nome(blank: false, nullable:false)
         assinatura(blank: true, nullable:true)
         pathImagem(blank: true, nullable:true)

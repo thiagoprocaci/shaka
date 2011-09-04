@@ -36,10 +36,10 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
 
     void testSaveUsuarioInvalido(){
         springSecurityService.demand.encodePassword("senha") { -> return "senha" }
-        assertFalse usuarioService.save(null, null, null)
+        assertFalse usuarioService.save(null, null, null,null,null)
         Usuario u = getUsuario()
         u.nome = null
-        assertFalse usuarioService.save(u, null, null)
+        assertFalse usuarioService.save(u, null, null,null,null)
         assertFalse u.errors.isEmpty()
         assertNull u.errors['pathImagem']
         assertNotNull u.errors['nome']
@@ -47,29 +47,32 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
 
     void testSaveUsuarioExtensaoInvalida() {
         springSecurityService.demand.encodePassword("senha") { -> return "senha" }
+		springSecurityService.demand.encodePassword("senha") { -> return "senha" }
         imageService.demand.extensaoValida() { nomeImagem -> return false }
         Usuario u = getUsuario()
         // u.id = 1 -- isDirty nao eh adicionado dinamicamente no mock GRAILS-7506
         byte[] content = "teste".getBytes()
         MultipartFile multipartFile = new MockMultipartFile("nome", content)
-        assertFalse usuarioService.save(u, "nomeImagem", multipartFile)
+        assertFalse usuarioService.save(u, "nomeImagem", multipartFile,"senha","senha")
         assertNotNull u.errors['pathImagem']
     }
 
     void testSaveUsuarioTamanhoImagemInvalida() {
         springSecurityService.demand.encodePassword("senha") { -> return "senha" }
+		springSecurityService.demand.encodePassword("senha") { -> return "senha" }
         imageService.demand.extensaoValida() { nomeImagem -> return true }
         imageService.demand.tamanhoImagemValido() { imagem, tamanhoMax -> return false }
         Usuario u = getUsuario()
         // u.id = 1 -- isDirty nao eh adicionado dinamicamente no mock GRAILS-7506
         byte[] content = "teste".getBytes()
         MultipartFile multipartFile = new MockMultipartFile("nome", content)
-        assertFalse usuarioService.save(u, "nomeImagem", multipartFile)
+        assertFalse usuarioService.save(u, "nomeImagem", multipartFile,"senha","senha")
         assertNotNull u.errors['pathImagem']
     }
 
     void testSaveUsuarioExtensaoSucesso() {
         springSecurityService.demand.encodePassword("senha") { -> return "senha" }
+		springSecurityService.demand.encodePassword("senha") { -> return "senha" }
         springSecurityService.demand.reauthenticate() {usuario,senha ->  }
         imageService.demand.extensaoValida() { nomeImagem -> return true }
         imageService.demand.tamanhoImagemValido() { imagem, tamanhoMax -> return true }
@@ -80,7 +83,7 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         u.pathImagem = "teste"
         byte[] content = "teste".getBytes()
         MultipartFile multipartFile = new MockMultipartFile("nome", content)
-        assertTrue usuarioService.save(u, "nomeImagem", multipartFile)
+        assertTrue usuarioService.save(u, "nomeImagem", multipartFile,"senha","senha")
         assertTrue u.errors.isEmpty()
     }
 

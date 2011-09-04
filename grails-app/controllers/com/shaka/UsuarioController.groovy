@@ -22,7 +22,7 @@ class UsuarioController {
             nomeOriginal = params.file.originalFilename
             file = request.getFile("file")
         }
-        if (usuarioService.save(usuarioInstance, nomeOriginal, file)) {
+        if (usuarioService.save(usuarioInstance, nomeOriginal, file, params.senha, params.confirmacaoSenha)) {
             flash.message = "${message(code: 'salvoSucesso')}"
             redirect(uri:"/")
         } else {
@@ -34,8 +34,9 @@ class UsuarioController {
         def usuarioInstance = usuarioService.getCurrentUser()
         if (usuarioInstance) {
             return [usuarioInstance: usuarioInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
+        } else {
+          redirect(uri:"/")
         }
-        redirect(uri:"/")
     }
 
     def update = {
@@ -48,13 +49,14 @@ class UsuarioController {
                 nomeOriginal = params.file.originalFilename
                 file = request.getFile("file")
             }
-            if (usuarioService.save(usuarioInstance, nomeOriginal, file)) {
+            if (usuarioService.save(usuarioInstance, nomeOriginal, file, params.senha, params.confirmacaoSenha)) {
                 flash.message = "${message(code: 'salvoSucesso')}"
                 redirect(uri:"/")
             } else {
                 render(view: "edit", model: [usuarioInstance: usuarioInstance])
             }
-        }
-        redirect(uri:"/")
+        } else {
+		  redirect(uri:"/")
+		}
     }
 }

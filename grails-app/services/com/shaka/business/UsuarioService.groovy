@@ -1,5 +1,6 @@
 package com.shaka.business
 
+import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
 
 import com.shaka.Usuario
@@ -36,18 +37,30 @@ class UsuarioService {
      * @param imagem foto do usuario
      * @return Retorna true caso seja bem sucedida a atualizacao
      */
-    public boolean save(Usuario usuario, String nomeImagem, MultipartFile imagem){
+    public boolean save(Usuario usuario, String nomeImagem, MultipartFile imagem, String senha, String confirmacaoSenha){
         if(usuario == null) {
             return false
         }
-        def password = null
-        if(usuario.id == null) {
-           // logica somente para autentica o usuario no primeiro acesso
-           password = usuario.password
-        }
-        def saved = !usuario.hasErrors() && usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
-        if(saved && password != null) {
-            springSecurityService.reauthenticate(usuario.username, password)
+		boolean senhaDiferente = false
+		boolean saved = false
+		if(StringUtils.hasText(senha)) {
+			if(senha != confirmacaoSenha) {
+				senhaDiferente = true
+			}
+			if(usuario.password != springSecurityService.encodePassword(senha)){
+				usuario.password = senha
+			}
+		}
+		if(usuario.validate()) {
+			if(senhaDiferente == true) {
+				usuario.errors.rejectValue "password", "senhaDiferenteConfirmacao"
+			} else {
+				saved = usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
+			}
+		}
+		// somente reautentica se o usuario tenha sido salvo e a sua senha alterada
+        if(saved && StringUtils.hasText(senha)) {
+            springSecurityService.reauthenticate(usuario.username, senha)
         }
         return saved
     }
@@ -73,7 +86,7 @@ class UsuarioService {
                 imageService.deleteImage(diretorioImagem, usuario.pathImagem)
             }
             // TODO criar hash para o nome do arquivo
-            def nome = "imagem_" + usuario.id + nomeImagem
+            def nome = UUID.randomUUID().toString() + "_imagem_" + usuario.id + "_" + nomeImagem
             imageService.saveImage(diretorioImagem,nome,imagem)
             usuario.pathImagem = nome
         }
