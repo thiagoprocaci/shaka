@@ -22,6 +22,7 @@ class TopicoTagLib {
      */
     def historicoMensagens = { attrs ->
         out << render(template:"/templates/historicoMensagemTemplate",
-            model:[mensagemList:attrs.mensagemList, diretorioImagem:attrs.diretorioImagem])
+            model:[mensagemList:attrs.mensagemList, diretorioImagem:attrs.diretorioImagem,
+                   mensagemTotal:attrs.mensagemTotal, topicoInstance:attrs.topicoInstance] )
     }
 }

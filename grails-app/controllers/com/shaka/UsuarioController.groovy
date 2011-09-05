@@ -1,5 +1,10 @@
 package com.shaka
 
+/**
+ *
+ * Controller para manipular dados de usuario
+ *
+ */
 class UsuarioController {
     static allowedMethods = [save: "POST", update: "POST"]
     def usuarioService
@@ -8,28 +13,26 @@ class UsuarioController {
         redirect(action: "create", params: params)
     }
 
+    /**
+     * Get da pagina de criacao do usuario
+     */
     def create = {
         def usuarioInstance = new Usuario()
         usuarioInstance.properties = params
         return [usuarioInstance: usuarioInstance]
     }
 
+    /**
+     * Post para salvar um usuario
+     */
     def save = {
-        def usuarioInstance = new Usuario(params)
-        def nomeOriginal = null
-        def file = null
-        if(params.file) {
-            nomeOriginal = params.file.originalFilename
-            file = request.getFile("file")
-        }
-        if (usuarioService.save(usuarioInstance, nomeOriginal, file, params.senha, params.confirmacaoSenha)) {
-            flash.message = "${message(code: 'salvoSucesso')}"
-            redirect(uri:"/")
-        } else {
-            render(view: "create", model: [usuarioInstance: usuarioInstance])
-        }
+        def usuarioInstance = new Usuario()
+        saveOrUpdate(usuarioInstance, "create")
     }
 
+    /**
+     * Get para pagina de edicao do usuario
+     */
     def edit = {
         def usuarioInstance = usuarioService.getCurrentUser()
         if (usuarioInstance) {
@@ -39,24 +42,38 @@ class UsuarioController {
         }
     }
 
+    /**
+     * Post para atualizar o usuario
+     */
     def update = {
         def usuarioInstance = usuarioService.getCurrentUser()
-        if (usuarioInstance) {
-            usuarioInstance.properties = params
+        saveOrUpdate(usuarioInstance, "edit")
+    }
+
+    /**
+     * Salva ou atualiza um usuario
+     * @param usuario usuario
+     * @param viewError string que identifica a pagina de erro
+     * @return Retorna proxima pagina a ser exibida
+     */
+    private saveOrUpdate(def usuario, def viewError) {
+        if (usuario) {
+            usuario.properties = params
             def nomeOriginal = null
             def file = null
             if(params.file) {
                 nomeOriginal = params.file.originalFilename
                 file = request.getFile("file")
             }
-            if (usuarioService.save(usuarioInstance, nomeOriginal, file, params.senha, params.confirmacaoSenha)) {
+            if (usuarioService.save(usuario, nomeOriginal, file, params.senha, params.confirmacaoSenha)) {
                 flash.message = "${message(code: 'salvoSucesso')}"
                 redirect(uri:"/")
             } else {
-                render(view: "edit", model: [usuarioInstance: usuarioInstance])
+                render(view: viewError, model: [usuarioInstance: usuario])
             }
         } else {
-		  redirect(uri:"/")
-		}
+            // usuario invalido mestre....
+          redirect(uri:"/")
+        }
     }
 }

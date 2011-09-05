@@ -25,4 +25,23 @@ class Usuario extends SecUser{
     static mapping = { assinatura type: 'text' }
 
     def beforeInsert = { dateCreated = new Date() }
+
+    /**
+     * Retorna usuario atraves da mensagem
+     */
+    def static getByMensagem = { mensagem ->
+        if(mensagem != null){
+            def criteria = Usuario.createCriteria()
+            def usuarioList = criteria.list {
+                mensagemList {
+                    eq('id',mensagem.id)
+                }
+                maxResults(1)
+            }
+            if(usuarioList != null && !usuarioList.isEmpty()){
+                return usuarioList.get(0)
+            }
+        }
+        return null
+    }
 }

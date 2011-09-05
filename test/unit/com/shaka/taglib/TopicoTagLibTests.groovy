@@ -52,19 +52,23 @@ class TopicoTagLibTests extends TagLibUnitTestCase {
     void testHistoricoMensagens() {
          def mensagemList = ["a", "b"]
          def diretorioImagem = "abc"
-         def attrs = [mensagemList: mensagemList, diretorioImagem:diretorioImagem]
+         def mensagemTotal = 2
+         def topicoInstance = new Topico(id:1)
+         def attrs = [mensagemList: mensagemList, diretorioImagem:diretorioImagem,mensagemTotal:mensagemTotal, topicoInstance:topicoInstance]
          tagLib.historicoMensagens(attrs)
          assertNotNull tagLib.renderArgs
          assertNotNull tagLib.renderArgs.template
          assertNotNull tagLib.renderArgs.model
          assertNotNull tagLib.renderArgs.model.mensagemList
          assertNotNull tagLib.renderArgs.model.diretorioImagem
+         assertNotNull tagLib.renderArgs.model.mensagemTotal
+         assertNotNull tagLib.renderArgs.model.topicoInstance
 
-
-
-         assertEquals 2, tagLib.renderArgs.model.size()
+         assertEquals 4, tagLib.renderArgs.model.size()
          assertEquals "/templates/historicoMensagemTemplate", tagLib.renderArgs.template
          assertEquals mensagemList, tagLib.renderArgs.model.mensagemList
          assertEquals diretorioImagem, tagLib.renderArgs.model.diretorioImagem
+         assertEquals mensagemTotal, tagLib.renderArgs.model.mensagemTotal
+         assertEquals topicoInstance, tagLib.renderArgs.model.topicoInstance
     }
 }

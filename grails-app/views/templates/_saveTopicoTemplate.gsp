@@ -84,10 +84,10 @@
                  </g:if>
              </span>
          </div>
-         <g:if test="${topicoInstance.id != null}">
+         <g:if test="${topicoInstance.id != null  && mensagemList != null}">
              <hr></hr>
-             <h2><g:message code="historicoMensagens"/></h2>
-             <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}" diretorioImagem="${diretorioImagem}" />
+             <h2><g:message code="historicoUltimasMensagens"/></h2>
+             <g:historicoMensagens mensagemList="${mensagemList}" diretorioImagem="${diretorioImagem}" />
          </g:if>
      </g:form>
 </div>

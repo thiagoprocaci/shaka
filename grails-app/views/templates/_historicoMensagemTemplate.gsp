@@ -13,6 +13,12 @@
          </thead>
         <tbody>
              <g:each in="${mensagemList}" var="m" status="i">
+                  <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                     <td colspan="2">
+                         <g:message code="postadaEm"  />
+                         <g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${m?.dateCreated}"/>
+                     </td>
+                  </tr>
                  <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                      <td class="usuarioTd">
                          <div>
@@ -48,3 +54,8 @@
          </tbody>
      </table>
  </div>
+ <g:if test="${mensagemTotal != null && topicoInstance != null}">
+    <div class="paginateButtons">
+        <g:paginate total="${mensagemTotal}" id="${topicoInstance.id}" />
+    </div>
+ </g:if>

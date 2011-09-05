@@ -12,7 +12,8 @@
                 <div class="message">${flash.message}</div>
             </g:if>
             <h1>${fieldValue(bean: topicoInstance, field: "titulo")}</h1>
-            <g:historicoMensagens mensagemList="${topicoInstance?.mensagemList}" diretorioImagem="${diretorioImagem}" />
+            <g:historicoMensagens topicoInstance="${topicoInstance}" mensagemList="${mensagemList}"
+                                  mensagemTotal="${mensagemTotal}" diretorioImagem="${diretorioImagem}" />
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${topicoInstance?.id}" />

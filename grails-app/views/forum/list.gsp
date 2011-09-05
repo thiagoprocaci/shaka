@@ -1,6 +1,7 @@
 <%@ page import="com.shaka.Forum" %>
 <%@ page import="com.shaka.Topico" %>
 <%@ page import="com.shaka.Mensagem" %>
+<%@ page import="com.shaka.Usuario" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -46,7 +47,7 @@
                                     <g:set var="msg" value="${Mensagem.getLast(f)}" />
                                     <g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${msg?.dateCreated}"/>
                                     <br />
-                                    ${msg?.usuario?.nome}
+                                    ${Usuario.getByMensagem(msg)?.nome}
                                  </td>
                              </tr>
                            </g:each>

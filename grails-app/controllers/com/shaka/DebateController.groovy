@@ -23,6 +23,7 @@ class DebateController {
     def createTopico = {
         def topico = new Topico()
         def mensagem = new Mensagem()
+        // TODO verificar parametros
         return [topicoInstance:topico, mensagemInstance:mensagem, forumId:params.id]
     }
 
@@ -47,12 +48,27 @@ class DebateController {
     }
 
     /**
-     * Mostra o topico com suas respostas
+     *  Prepara exibicao do topico
      */
     def showTopico = {
-        def topicoInstance = debateService.visitarTopico(params.id)
+        debateService.visitarTopico(params.id)
+        // redirect para evitar que a visita ao topico seja contado mais de uma vez
+        redirect(action:"listTopico", params:params)
+    }
+
+    /**
+     * Lista o topico com suas mensagens
+     */
+    def listTopico = {
+        def topicoInstance = Topico.get(params.id)
         if(topicoInstance){
-            return [topicoInstance: topicoInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
+            params.max = Math.min(params.max ? params.int('max') : 10, 100)
+            params.offset = (params.offset ? params.int('offset'): 0);
+            def mensagemList = Mensagem.findAllByTopico(topicoInstance,[max: params.max, offset: params.offset , sort:"dateCreated", order:"asc"])
+            render(view: "showTopico", model:[topicoInstance: topicoInstance,
+                                              mensagemList:mensagemList,
+                                              diretorioImagem : usuarioService.diretorioImagemRelativo,
+                                              mensagemTotal:Mensagem.countByTopico(topicoInstance)])
         } else {
             redirect(uri:"/")
         }
@@ -65,7 +81,8 @@ class DebateController {
         def topicoInstance = Topico.get(params.id)
         if(topicoInstance){
             def mensagemInstance = new Mensagem()
-            return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
+            def mensagemList = Mensagem.findAllByTopico(topicoInstance,[max: 10 , sort:"dateCreated", order:"desc"])
+            return [topicoInstance:topicoInstance, mensagemInstance:mensagemInstance, diretorioImagem : usuarioService.diretorioImagemRelativo, mensagemList:mensagemList]
         } else {
             redirect(uri:"/")
         }
@@ -83,7 +100,8 @@ class DebateController {
                 flash.message = "${message(code: 'salvoSucesso')}"
                 redirect(action: "showTopico", id: topicoInstance.id)
             } else {
-                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance])
+                def mensagemList = Mensagem.findAllByTopico(topicoInstance,[max: 10 , sort:"dateCreated", order:"desc"])
+                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance, mensagemList:mensagemList])
             }
         } else {
             redirect(uri:"/")
@@ -100,7 +118,8 @@ class DebateController {
         if(params.id) {
             topicoInstance = Topico.get(params.id)
             if(topicoInstance){
-                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true, diretorioImagem : usuarioService.diretorioImagemRelativo])
+                def mensagemList = Mensagem.findAllByTopico(topicoInstance,[max: 10 , sort:"dateCreated", order:"desc"])
+                render(view: "responderTopico", model: [topicoInstance: topicoInstance, mensagemInstance:mensagemInstance,visualizar:true, diretorioImagem : usuarioService.diretorioImagemRelativo, mensagemList:mensagemList])
             } else {
                 redirect(uri:"/")
             }
