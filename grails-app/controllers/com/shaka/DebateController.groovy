@@ -6,8 +6,6 @@ package com.shaka
  */
 class DebateController {
 
-    //TODO paginacao na exibiacao das mensagens
-
     static allowedMethods = [saveTopico: "POST", saveResposta: "POST"]
 
     def debateService
