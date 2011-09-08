@@ -13,7 +13,7 @@ class Usuario extends SecUser{
     Date dateCreated
     String pathImagem
 
-    static hasMany = [mensagemList:Mensagem, topicoList:Topico]
+    static hasMany = [mensagemList:Mensagem, topicoList:Topico, avaliacaoMensagemList:AvaliacaoMensagem]
 
     static constraints = {
         email(unique:true, blank: false, email:true)

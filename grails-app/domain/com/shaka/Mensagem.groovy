@@ -1,6 +1,8 @@
 package com.shaka
 
-import java.util.Date;
+import java.util.Date
+
+import org.springframework.util.StringUtils
 
 class Mensagem {
     String texto
@@ -8,6 +10,7 @@ class Mensagem {
 
     static belongsTo = [topico:Topico]
     static hasOne = [usuario:Usuario]
+    static hasMany = [avaliacaoMensagemList:AvaliacaoMensagem]
 
     static constraints = {
         texto blank:false
@@ -30,7 +33,6 @@ class Mensagem {
             projections {
                 countDistinct('id')
             }
-
         }
         return total
     }

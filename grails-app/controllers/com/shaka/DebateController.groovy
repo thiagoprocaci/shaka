@@ -1,5 +1,8 @@
 package com.shaka
 
+import org.springframework.util.StringUtils
+
+
 
 /**
  * Controller para manipular uma debate (topico + mensagens)
@@ -127,4 +130,32 @@ class DebateController {
         }
     }
 
+    /**
+     * Avaliacao de uma mensagem
+     */
+    def avaliarMensagem = {
+        def mensagem = Mensagem.get(params.id)
+        debateService.avaliarMensagem(mensagem, params.boolean('avaliacao'))
+        render getTextoAvaliacaoMensagem(mensagem)
+    }
+
+    def static getTextoAvaliacaoMensagem = { mensagem ->
+        def gostei = AvaliacaoMensagem.countByMensagemAndPositivo(mensagem, true)
+        def naoGostei = AvaliacaoMensagem.countByMensagemAndPositivo(mensagem, false)
+        def textMessage = ''
+        if(gostei > 1){
+            textMessage = "${message(code: 'pessoasGostam', args: [gostei])} "
+        } else if(gostei == 1) {
+            textMessage = "${message(code: 'pessoaGosta', args: [gostei])} "
+        }
+        if(StringUtils.hasText(textMessage) && naoGostei){
+            textMessage+= " <br /> "
+        }
+        if(naoGostei > 1){
+            textMessage+= "${message(code: 'pessoasNaoGostam', args: [naoGostei])} "
+        } else if(naoGostei == 1) {
+            textMessage+= "${message(code: 'pessoaNaoGosta', args: [naoGostei])} "
+        }
+        return textMessage
+    }
 }

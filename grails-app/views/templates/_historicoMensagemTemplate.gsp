@@ -1,4 +1,7 @@
+<%@page import="com.shaka.AvaliacaoMensagem"%>
 <%@ page import="com.shaka.Mensagem" %>
+<%@ page import="com.shaka.AvaliacaoMensagem" %>
+<%@ page import="com.shaka.DebateController" %>
 <div class="historicoMensagemList">
      <table>
          <thead>
@@ -48,6 +51,17 @@
                  <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                      <td colspan="2">
                         ${m?.usuario?.assinatura?.decodeHTML()}
+                        <sec:ifLoggedIn>
+                            <div id="message_${m.id}">
+                               ${DebateController.getTextoAvaliacaoMensagem(m)}
+                            </div>
+                           <g:remoteLink action="avaliarMensagem" id="${m.id}" params="${[avaliacao:true]}" update="message_${m.id}">
+                               <g:message code="gostei"/>
+                           </g:remoteLink>
+                            <g:remoteLink action="avaliarMensagem" id="${m.id}" params="${[avaliacao:false]}" update="message_${m.id}">
+                                <g:message code="naoGostei"/>
+                            </g:remoteLink>
+                        </sec:ifLoggedIn>
                      </td>
                  </tr>
              </g:each>

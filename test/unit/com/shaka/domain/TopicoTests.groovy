@@ -42,6 +42,7 @@ class TopicoTests extends GrailsUnitTestCase {
         assertNotNull(topico.errors)
         assertTrue(topico.errors.isEmpty())
         assertNotNull(topico.dateCreated)
+        assertEquals 0,topico.numeroVisitas
 
     }
 }

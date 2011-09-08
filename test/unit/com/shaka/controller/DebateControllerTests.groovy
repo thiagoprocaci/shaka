@@ -283,7 +283,94 @@ class DebateControllerTests extends ControllerUnitTestCase {
         compareList(mensagemList, controller.renderArgs.model.mensagemList)
     }
 
+    void testSaveRespostaSucesso() {
+        def forum = new Forum(nome:"nome", descricao:"descricao")
+        forum.save()
+        def topico = new Topico(titulo: 'titulo', forum: forum)
+        topico.save()
 
+        def paramsMock = [id : topico.id]
+        controller.params.putAll(paramsMock)
+        debateService.demand.save() { topicoInstance, mensagemInstance ->
+            return true
+        }
+        controller.saveResposta()
+
+        assertNotNull controller.redirectArgs
+        assertNotNull controller.redirectArgs.action
+        assertNotNull controller.redirectArgs.id
+
+        assertEquals 2, controller.redirectArgs.size()
+        assertEquals "showTopico", controller.redirectArgs.action
+        assertEquals paramsMock.id, controller.redirectArgs.id
+        assertEquals "salvoSucesso", controller.flash.message
+    }
+
+    void testVisualizarNovoTopico() {
+        def paramsMock = [titulo : 'titulo', forumId: 1, texto:'texto']
+        controller.params.putAll(paramsMock)
+        controller.visualizar()
+
+        assertNotNull controller.renderArgs
+        assertNotNull controller.renderArgs.view
+        assertNotNull controller.renderArgs.model
+        assertEquals 2, controller.renderArgs.size()
+        assertEquals 4, controller.renderArgs.model.size()
+        assertNotNull controller.renderArgs.model.topicoInstance
+        assertNotNull controller.renderArgs.model.mensagemInstance
+        assertNotNull controller.renderArgs.model.forumId
+        assertNotNull controller.renderArgs.model.visualizar
+
+        assertEquals paramsMock.titulo, controller.renderArgs.model.topicoInstance.titulo
+        assertEquals paramsMock.texto, controller.renderArgs.model.mensagemInstance.texto
+        assertTrue controller.renderArgs.model.visualizar
+        assertEquals paramsMock.forumId, controller.renderArgs.model.forumId
+        assertEquals "createTopico", controller.renderArgs.view
+    }
+
+    void testVisualizarTopico () {
+        def forum = new Forum(nome:"nome", descricao:"descricao")
+        forum.save()
+        def topico = new Topico(titulo: 'titulo', forum: forum)
+        topico.save()
+        def mensagem = new Mensagem(texto:'texto', topico:topico)
+        mensagem.save()
+        def mensagem_ = new Mensagem(texto:'texto_', topico:topico)
+        mensagem_.save()
+
+        def mensagemList = Mensagem.findAllByTopico(topico,[max: 10 , sort:"dateCreated", order:"desc"])
+
+        def paramsMock = [titulo : 'titulo', forumId: forum.id, texto:'texto', id:topico.id]
+        controller.params.putAll(paramsMock)
+        controller.visualizar()
+
+        assertNotNull controller.renderArgs
+        assertNotNull controller.renderArgs.view
+        assertNotNull controller.renderArgs.model
+        assertNotNull controller.renderArgs.model.topicoInstance
+        assertNotNull controller.renderArgs.model.mensagemInstance
+        assertNotNull controller.renderArgs.model.visualizar
+        assertNotNull controller.renderArgs.model.diretorioImagem
+        assertNotNull controller.renderArgs.model.mensagemList
+        assertEquals 2, controller.renderArgs.size()
+        assertEquals 5, controller.renderArgs.model.size()
+        assertEquals paramsMock.texto, controller.renderArgs.model.mensagemInstance.texto
+        assertEquals topico, controller.renderArgs.model.topicoInstance
+        assertEquals "responderTopico", controller.renderArgs.view
+        assertTrue controller.renderArgs.model.visualizar
+        assertEquals controller.usuarioService.diretorioImagemRelativo, controller.renderArgs.model.diretorioImagem
+        compareList(mensagemList, controller.renderArgs.model.mensagemList)
+    }
+
+    void testVisualizarTopicoNull() {
+        def paramsMock = [id:1]
+        controller.params.putAll(paramsMock)
+        controller.visualizar()
+        assertNotNull controller.redirectArgs
+        assertNotNull controller.redirectArgs.uri
+        assertEquals 1, controller.redirectArgs.size()
+        assertEquals "/", controller.redirectArgs.uri
+    }
 
     private compareList(def list1, def list2) {
         assertNotNull list1

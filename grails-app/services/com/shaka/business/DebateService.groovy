@@ -1,5 +1,6 @@
 package com.shaka.business
 
+import com.shaka.AvaliacaoMensagem;
 import com.shaka.Mensagem
 import com.shaka.Topico
 
@@ -53,5 +54,23 @@ class DebateService {
             return topico.save()
         }
         return null
+    }
+
+    /**
+     * Avalia se um usuario gostou ou nao de uma mensagem
+     * @param mensagem mensagem a ser avaliada
+     * @param avaliacao valor booleano com a avaliacao da mensagem
+     */
+    def avaliarMensagem(Mensagem mensagem, boolean avaliacao) {
+        if(mensagem && mensagem.id != null){
+            def usuario = usuarioService.getCurrentUser();
+            if(usuario) {
+                def avaliacaoMensagem = new AvaliacaoMensagem()
+                avaliacaoMensagem.usuario = usuario
+                avaliacaoMensagem.mensagem = mensagem
+                avaliacaoMensagem.positivo = avaliacao
+                avaliacaoMensagem.save()
+            }
+        }
     }
 }
