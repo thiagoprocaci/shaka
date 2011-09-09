@@ -5,8 +5,11 @@
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
         <g:layoutHead />
+
         <g:javascript library="application" />
+        <g:javascript library="jquery" plugin="jquery"/>
         <g:javascript library="prototype" />
+        <g:javascript library="outside-events.min" />
     </head>
     <body>
         <div id="spinner" class="spinner" style="display:none;">
@@ -15,12 +18,6 @@
         <div id="grailsLogo">
             <a href="http://grails.org"><img src="${resource(dir:'images',file:'grails_logo.png')}" alt="Grails" border="0" /></a>
         </div>
-        <sec:ifLoggedIn>
-            <div>
-               <sec:username />
-               <g:link controller="logout"> <g:message code="sair" /></g:link>
-            </div>
-        </sec:ifLoggedIn>
         <g:layoutBody />
     </body>
 </html>

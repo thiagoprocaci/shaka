@@ -15,4 +15,10 @@ class UsuarioTagLib {
            model:[usuarioInstance:attrs.usuarioInstance, message:attrs.message, action:attrs.action])
    }
 
+   def imagemUsuario = { attrs ->
+       out << render(template:"/templates/imagemUsuarioTemplate",
+           model:[usuarioInstance:attrs.usuarioInstance])
+
+   }
+
 }

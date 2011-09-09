@@ -27,14 +27,7 @@
                          <div>
                             ${m?.usuario?.nome}
                          </div>
-                         <div >
-                            <g:if test="${m?.usuario?.pathImagem != null}">
-                                <img src="${resource(dir: diretorioImagem, file: m?.usuario?.pathImagem)}" style="width:100px;height:100px" />
-                            </g:if>
-                            <g:if test="${m?.usuario?.pathImagem == null}">
-                                <img src="${resource(dir: 'images/icones', file: 'anonimo.jpg')}" style="width:100px;height:100px" />
-                            </g:if>
-                        </div>
+                         <g:imagemUsuario usuarioInstance="${m?.usuario}"/>
                         <div>
                              <g:message code="membroDesde" />
                              <g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${m?.usuario?.dateCreated}"/>

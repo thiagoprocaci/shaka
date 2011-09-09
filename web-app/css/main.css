@@ -114,6 +114,47 @@ input:focus,select:focus,textarea:focus {
     padding-left: 25px;
 }
 
+#menuUsuario {
+    border: 1px solid ;
+    border: 1px solid #CCCCCC;
+    width: 270px;
+    z-index: 1000;
+    position: absolute;
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 6px;
+    right: 1px;
+}
+
+.spanUser {
+  float: right;
+}
+
+.divFoto {
+    width: 120px;
+    float: left;
+}
+
+.divFoto img {
+    width: 100px;
+    height: 100px
+}
+
+#menuDadosUsuario {
+    padding: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.boldText {
+    font-weight: bold;
+}
+
+.menuInfo {
+    padding: 2px;
+}
+
 /* MESSAGES AND ERRORS */
 .message {
     background: #f3f8fc url(../images/skin/information.png) 8px 50%

@@ -7,11 +7,17 @@ import com.shaka.authentication.SecUser
 class Usuario extends SecUser{
     //TODO mapear paginas de acesso no security
 
+    transient usuarioService
+
     String nome
     String email
     String assinatura
     Date dateCreated
     String pathImagem
+
+    String getDiretorioImagemRelativo() { usuarioService.diretorioImagemRelativo }
+
+    static transients = ['diretorioImagemRelativo']
 
     static hasMany = [mensagemList:Mensagem, topicoList:Topico, avaliacaoMensagemList:AvaliacaoMensagem]
 
@@ -44,4 +50,5 @@ class Usuario extends SecUser{
         }
         return null
     }
+
 }
