@@ -134,7 +134,9 @@ class DebateController {
      * Avaliacao de uma mensagem
      */
     def avaliarMensagem = {
-        def mensagem = Mensagem.get(params.id)
+        // TODO retornar erro 401 se nao tiver usuario logado..
+		// evita bizarrices
+		def mensagem = Mensagem.get(params.id)
         debateService.avaliarMensagem(mensagem, params.boolean('avaliacao'))
         render getTextoAvaliacaoMensagem(mensagem)
     }

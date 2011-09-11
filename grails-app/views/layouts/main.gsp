@@ -10,6 +10,8 @@
         <g:javascript library="jquery" plugin="jquery"/>
         <g:javascript library="prototype" />
         <g:javascript library="outside-events.min" />
+        <g:javascript src='prototype/scriptaculous.js?load=effects' />
+
     </head>
     <body>
         <div id="spinner" class="spinner" style="display:none;">
@@ -18,6 +20,7 @@
         <div id="grailsLogo">
             <a href="http://grails.org"><img src="${resource(dir:'images',file:'grails_logo.png')}" alt="Grails" border="0" /></a>
         </div>
+
         <g:layoutBody />
     </body>
 </html>

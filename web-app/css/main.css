@@ -1,454 +1,507 @@
 html * {
-    margin: 0;
-    /*padding: 0; SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
+	margin: 0;
+	/*padding: 0; SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
 }
 
 /* GENERAL */
 .spinner {
-    padding: 5px;
-    position: absolute;
-    right: 0;
+	padding: 5px;
+	position: absolute;
+	right: 0;
 }
 
 body {
-    background: #fff;
-    color: #333;
-    font: 11px verdana, arial, helvetica, sans-serif;
+	background: #fff;
+	color: #333;
+	font: 11px verdana, arial, helvetica, sans-serif;
 }
 
 #grailsLogo {
-    padding: 20px;
+	padding: 20px;
 }
 
 a:link,a:visited,a:hover {
-    color: #666;
-    font-weight: bold;
-    text-decoration: none;
+	color: #666;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 h1 {
-    color: #48802c;
-    font-weight: normal;
-    font-size: 16px;
-    margin: .8em 0 .3em 0;
+	color: #48802c;
+	font-weight: normal;
+	font-size: 16px;
+	margin: .8em 0 .3em 0;
 }
 
 h2 {
-    color: #48802c;
-    font-weight: normal;
-    font-size: 13px;
-    margin: .8em 0 .3em 0;
+	color: #48802c;
+	font-weight: normal;
+	font-size: 13px;
+	margin: .8em 0 .3em 0;
 }
 
 hr {
-    margin-top: 10px;
-    margin-bottom: 5px;
+	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
 ul {
-    padding-left: 15px;
+	padding-left: 15px;
 }
 
 input,select,textarea {
-    background-color: #fcfcfc;
-    border: 1px solid #ccc;
-    font: 11px verdana, arial, helvetica, sans-serif;
-    margin: 2px 0;
-    padding: 2px 4px;
+	background-color: #fcfcfc;
+	border: 1px solid #ccc;
+	font: 11px verdana, arial, helvetica, sans-serif;
+	margin: 2px 0;
+	padding: 2px 4px;
 }
 
 select {
-    padding: 2px 2px 2px 0;
+	padding: 2px 2px 2px 0;
 }
 
 textarea {
-    width: 250px;
-    height: 150px;
-    vertical-align: top;
+	width: 250px;
+	height: 150px;
+	vertical-align: top;
 }
 
 input:focus,select:focus,textarea:focus {
-    border: 1px solid #b2d1ff;
+	border: 1px solid #b2d1ff;
 }
 
 .body {
-    float: left;
-    margin: 0 15px 10px 15px;
-    width: 1000px;
+	float: left;
+	margin: 0 15px 10px 15px;
+	width: 1000px;
 }
 
 /* NAVIGATION MENU */
 .nav {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-style: solid none solid none;
-    margin-top: 5px;
-    padding: 7px 12px;
+	background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
+	border: 1px solid #ccc;
+	border-style: solid none solid none;
+	margin-top: 5px;
+	padding: 7px 12px;
 }
 
 .menuButton {
-    font-size: 10px;
-    padding: 0 5px;
+	font-size: 10px;
+	padding: 0 5px;
 }
 
 .menuButton a {
-    color: #333;
-    padding: 4px 6px;
+	color: #333;
+	padding: 4px 6px;
 }
 
 .menuButton a.home {
-    background: url(../images/skin/house.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
+	background: url(../images/skin/house.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
 }
 
 .menuButton a.list {
-    background: url(../images/skin/database_table.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
+	background: url(../images/skin/database_table.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
 }
 
 .menuButton a.create {
-    background: url(../images/skin/database_add.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
+	background: url(../images/skin/database_add.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
 }
 
 #menuUsuario {
-    border: 1px solid ;
-    border: 1px solid #CCCCCC;
-    width: 270px;
-    z-index: 1000;
-    position: absolute;
-    background: none repeat scroll 0 0 #FFFFFF;
-    padding: 6px;
-    right: 1px;
+	border: 1px solid;
+	border: 1px solid #CCCCCC;
+	width: 270px;
+	z-index: 1000;
+	position: absolute;
+	background: none repeat scroll 0 0 #FFFFFF;
+	padding: 6px;
+	right: 1px;
 }
 
 .spanUser {
-  float: right;
+	float: right;
 }
 
 .divFoto {
-    width: 120px;
-    float: left;
+	width: 120px;
+	float: left;
 }
 
 .divFoto img {
-    width: 100px;
-    height: 100px
+	width: 100px;
+	height: 100px
 }
 
 #menuDadosUsuario {
-    padding: 10px;
+	padding: 10px;
 }
 
 .clear {
-    clear: both;
+	clear: both;
 }
 
 .boldText {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .menuInfo {
-    padding: 2px;
+	padding: 2px;
 }
 
 /* MESSAGES AND ERRORS */
 .message {
-    background: #f3f8fc url(../images/skin/information.png) 8px 50%
-        no-repeat;
-    border: 1px solid #b2d1ff;
-    color: #006dba;
-    margin: 10px 0 5px 0;
-    padding: 5px 5px 5px 30px
+	background: #f3f8fc url(../images/skin/information.png) 8px 50%
+		no-repeat;
+	border: 1px solid #b2d1ff;
+	color: #006dba;
+	margin: 10px 0 5px 0;
+	padding: 5px 5px 5px 30px
 }
 
 div.errors {
-    background: #fff3f3;
-    border: 1px solid red;
-    color: #cc0000;
-    margin: 10px 0 5px 0;
-    padding: 5px 0 5px 0;
+	background: #fff3f3;
+	border: 1px solid red;
+	color: #cc0000;
+	margin: 10px 0 5px 0;
+	padding: 5px 0 5px 0;
 }
 
 div.errors ul {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 div.errors li {
-    background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
-    line-height: 16px;
-    padding-left: 30px;
+	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
+	line-height: 16px;
+	padding-left: 30px;
 }
 
 td.errors select {
-    border: 1px solid red;
+	border: 1px solid red;
 }
 
 td.errors input {
-    border: 1px solid red;
+	border: 1px solid red;
 }
 
 td.errors textarea {
-    border: 1px solid red;
+	border: 1px solid red;
 }
 
 /* TABLES */
 table {
-    border: 1px solid #ccc;
-    width: 100%
+	border: 1px solid #ccc;
+	width: 100%
 }
 
 tr {
-    border: 0;
+	border: 0;
 }
 
 td,th {
-    font: 11px verdana, arial, helvetica, sans-serif;
-    line-height: 12px;
-    padding: 5px 6px;
-    text-align: left;
-    vertical-align: top;
+	font: 11px verdana, arial, helvetica, sans-serif;
+	line-height: 12px;
+	padding: 5px 6px;
+	text-align: left;
+	vertical-align: top;
 }
 
 th {
-    background: #fff url(../images/skin/shadow.jpg);
-    color: #666;
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 17px;
-    padding: 2px 6px;
+	background: #fff url(../images/skin/shadow.jpg);
+	color: #666;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 17px;
+	padding: 2px 6px;
 }
 
 th a:link,th a:visited,th a:hover {
-    color: #333;
-    display: block;
-    font-size: 10px;
-    text-decoration: none;
-    width: 100%;
+	color: #333;
+	display: block;
+	font-size: 10px;
+	text-decoration: none;
+	width: 100%;
 }
 
 th.asc a,th.desc a {
-    background-position: right;
-    background-repeat: no-repeat;
+	background-position: right;
+	background-repeat: no-repeat;
 }
 
 th.asc a {
-    background-image: url(../images/skin/sorted_asc.gif);
+	background-image: url(../images/skin/sorted_asc.gif);
 }
 
 th.desc a {
-    background-image: url(../images/skin/sorted_desc.gif);
+	background-image: url(../images/skin/sorted_desc.gif);
 }
 
 .odd {
-    background: #f7f7f7;
-    border: 1px solid #CCCCCC;
+	background: #f7f7f7;
+	border: 1px solid #CCCCCC;
 }
 
 .even {
-    background: #fff;
-    border: 1px solid #CCCCCC;
+	background: #fff;
+	border: 1px solid #CCCCCC;
 }
 
 /* Historico mensagem */
 .historicoMensagemList table {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
 .historicoMensagemList th,.historicoMensagemList td {
-    border-left: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 }
 
 .usuarioTd {
-    width: 140px;
+	width: 140px;
 }
 
 /* LIST */
 .list table {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
 .list th,.list td {
-    border-left: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 }
 
 .list th:hover,.list tr:hover {
-    background: #b2d1ff;
+	background: #b2d1ff;
 }
 
 /* PAGINATION */
 .paginateButtons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-top: 0;
-    color: #666;
-    font-size: 10px;
-    overflow: hidden;
-    padding: 10px 3px;
+	background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
+	border: 1px solid #ccc;
+	border-top: 0;
+	color: #666;
+	font-size: 10px;
+	overflow: hidden;
+	padding: 10px 3px;
 }
 
 .paginateButtons a {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-color: #ccc #aaa #aaa #ccc;
-    color: #666;
-    margin: 0 3px;
-    padding: 2px 6px;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-color: #ccc #aaa #aaa #ccc;
+	color: #666;
+	margin: 0 3px;
+	padding: 2px 6px;
 }
 
 .paginateButtons span {
-    padding: 2px 3px;
+	padding: 2px 3px;
 }
 
 /* DIALOG */
 .dialog table {
-    padding: 5px 0;
+	padding: 5px 0;
 }
 
 .prop {
-    padding: 5px;
+	padding: 5px;
 }
 
 .prop .name {
-    text-align: left;
-    width: 15%;
-    white-space: nowrap;
+	text-align: left;
+	width: 15%;
+	white-space: nowrap;
 }
 
 .prop .value {
-    text-align: left;
-    width: 85%;
+	text-align: left;
+	width: 85%;
 }
 
 /* ACTION BUTTONS */
 .buttons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    color: #666;
-    font-size: 10px;
-    margin-top: 5px;
-    overflow: hidden;
-    padding: 0;
+	background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
+	border: 1px solid #ccc;
+	color: #666;
+	font-size: 10px;
+	margin-top: 5px;
+	overflow: hidden;
+	padding: 0;
 }
 
 .buttons input,.buttons a {
-    background: #fff;
-    border: 0;
-    color: #333;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-    margin-left: 3px;
-    overflow: visible;
-    padding: 2px 6px;
+	background: #fff;
+	border: 0;
+	color: #333;
+	cursor: pointer;
+	font-size: 10px;
+	font-weight: bold;
+	margin-left: 3px;
+	overflow: visible;
+	padding: 2px 6px;
 }
 
 .buttons a {
-    margin-left: 3px;
-    margin-top: 2px;
-    margin-right: 0px;
-    margin-bottom: 2px;
-    display: inline-block;
+	margin-left: 3px;
+	margin-top: 2px;
+	margin-right: 0px;
+	margin-bottom: 2px;
+	display: inline-block;
 }
 
 .buttons input.delete {
-    background: transparent url(../images/skin/database_delete.png) 5px 50%
-        no-repeat;
-    padding-left: 28px;
+	background: transparent url(../images/skin/database_delete.png) 5px 50%
+		no-repeat;
+	padding-left: 28px;
 }
 
 .buttons input.edit,.buttons a.edit {
-    background: transparent url(../images/skin/database_edit.png) 5px 50%
-        no-repeat;
-    padding-left: 28px;
+	background: transparent url(../images/skin/database_edit.png) 5px 50%
+		no-repeat;
+	padding-left: 28px;
 }
 
 .buttons input.save {
-    background: transparent url(../images/skin/database_save.png) 5px 50%
-        no-repeat;
-    padding-left: 28px;
+	background: transparent url(../images/skin/database_save.png) 5px 50%
+		no-repeat;
+	padding-left: 28px;
 }
 
 /* login */
 #login {
-    margin: 15px 0px;
-    padding: 0px;
-    text-align: center;
+	margin: 15px 0px;
+	padding: 0px;
+	text-align: center;
 }
 
 #login .inner {
-    width: 340px;
-    padding-bottom: 6px;
-    margin: 60px auto;
-    text-align: left;
-    border: 1px solid #aab;
-    background-color: #f0f0fa;
-    -moz-box-shadow: 2px 2px 2px #eee;
-    -webkit-box-shadow: 2px 2px 2px #eee;
-    -khtml-box-shadow: 2px 2px 2px #eee;
-    box-shadow: 2px 2px 2px #eee;
+	width: 340px;
+	padding-bottom: 6px;
+	margin: 60px auto;
+	text-align: left;
+	border: 1px solid #aab;
+	background-color: #f0f0fa;
+	-moz-box-shadow: 2px 2px 2px #eee;
+	-webkit-box-shadow: 2px 2px 2px #eee;
+	-khtml-box-shadow: 2px 2px 2px #eee;
+	box-shadow: 2px 2px 2px #eee;
 }
 
 #login .inner .fheader {
-    padding: 18px 26px 14px 26px;
-    background-color: #f7f7ff;
-    margin: 0px 0 14px 0;
-    color: #2e3741;
-    font-size: 18px;
-    font-weight: bold;
+	padding: 18px 26px 14px 26px;
+	background-color: #f7f7ff;
+	margin: 0px 0 14px 0;
+	color: #2e3741;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 #login .inner .cssform p {
-    clear: left;
-    margin: 0;
-    padding: 4px 0 3px 0;
-    padding-left: 105px;
-    margin-bottom: 20px;
-    height: 1%;
+	clear: left;
+	margin: 0;
+	padding: 4px 0 3px 0;
+	padding-left: 105px;
+	margin-bottom: 20px;
+	height: 1%;
 }
 
 #login .inner .cssform input[type='text'] {
-    width: 120px;
+	width: 120px;
 }
 
 #login .inner .cssform label {
-    font-weight: bold;
-    float: left;
-    text-align: right;
-    margin-left: -105px;
-    width: 110px;
-    padding-top: 3px;
-    padding-right: 10px;
+	font-weight: bold;
+	float: left;
+	text-align: right;
+	margin-left: -105px;
+	width: 110px;
+	padding-top: 3px;
+	padding-right: 10px;
 }
 
 #login #remember_me_holder {
-    padding-left: 120px;
+	padding-left: 120px;
 }
 
 #login #submit {
-    margin-left: 15px;
+	margin-left: 15px;
 }
 
 #login #remember_me_holder label {
-    float: none;
-    margin-left: 0;
-    text-align: left;
-    width: 200px
+	float: none;
+	margin-left: 0;
+	text-align: left;
+	width: 200px
 }
 
 #login .inner .login_message {
-    padding: 6px 25px 20px 25px;
-    color: #c33;
+	padding: 6px 25px 20px 25px;
+	color: #c33;
 }
 
 #login .inner .text_ {
-    width: 120px;
+	width: 120px;
 }
 
 #login .inner .chk {
-    height: 12px;
+	height: 12px;
+}
+
+/** Autenticacao ajax*/
+#ajaxLogin {
+	display: block;
+}
+
+#ajaxLogin .inner {
+	margin: 0px auto;
+	text-align: left;
+	padding: 10px;
+	background-color: #EEF;
+}
+
+#ajaxLogin .inner .fheader {
+	padding: 4px;
+	margin: 3px 0px 3px 0;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#ajaxLogin .inner .cssform p {
+	clear: left;
+	padding: 5px 0 8px 0;
+	padding-left: 105px;
+	height: 1%;
+}
+
+#ajaxLogin .inner .cssform input[type='text'] {
+	width: 120px;
+}
+
+#ajaxLogin .inner .cssform label {
+	font-weight: bold;
+	float: left;
+	margin-left: -105px;
+	width: 100px;
+}
+
+#ajaxLogin .inner .login_message {
+	color: red;
+}
+
+#ajaxLogin .inner .text_ {
+	width: 120px;
+}
+
+#ajaxLogin .inner .chk {
+	height: 12px;
+}
+
+.errorMessage {
+	color: red;
 }

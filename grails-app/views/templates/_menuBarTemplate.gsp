@@ -22,9 +22,9 @@
      </sec:ifLoggedIn>
      <sec:ifNotLoggedIn>
          <span class="spanUser menuButton">
-            <g:link class="list" action="auth" controller="login">
-                <g:message code="fazerLogin" />
-            </g:link>
+            <a href="#" name="userLink">
+                 <g:message code="fazerLogin" />
+           </a>
          </span>
      </sec:ifNotLoggedIn>
  </div>
@@ -44,7 +44,14 @@
                  <g:link controller="logout"><g:message code="sair" /></g:link>
             </div>
         </div>
-    <script type="text/javascript">
+ </sec:ifLoggedIn>
+ <sec:ifNotLoggedIn>
+ 	<div id="menuUsuario" style="display:none">
+		<g:render template='/templates/ajaxLogin'/>
+	</div>
+ </sec:ifNotLoggedIn>
+
+<script type="text/javascript">
          var $j = jQuery.noConflict();
          $j(document).ready(function() {
              $j('a[name="userLink"]').click(function(event) {
@@ -60,22 +67,5 @@
                   }
                });
          });
-    </script>
- </sec:ifLoggedIn>
- <sec:ifNotLoggedIn>
- <script type='text/javascript'>
-
-// center the form
-Event.observe(window, 'load', function() { var ajaxLogin = $('ajaxLogin'); $('ajaxLogin').style.left = ((document.body.getDimensions().width - ajaxLogin.getDimensions().width) / 2) + 'px'; $('ajaxLogin').style.top = ((document.body.getDimensions().height - ajaxLogin.getDimensions().height) / 2) + 'px'; });
-
-function showLogin() { $('ajaxLogin').style.display = 'block'; }
-
-function cancelLogin() { Form.enable(document.ajaxLoginForm); Element.hide('ajaxLogin'); }
-
-function authAjax() { Form.enable(document.ajaxLoginForm); Element.update('loginMessage', 'Sending request ...'); Element.show('loginMessage');
-
-var form = document.ajaxLoginForm; var params = Form.serialize(form); Form.disable(form); new Ajax.Request(form.action, { method: 'POST', postBody: params, onSuccess: function(response) { Form.enable(document.ajaxLoginForm); var responseText = response.responseText || '[]'; var json = responseText.evalJSON(); if (json.success) { Element.hide('ajaxLogin'); $('loginLink').update('Logged in as ' + json.username + ' (<%=link(controller: 'logout') { 'Logout' }%>)'); } else if (json.error) { Element.update('loginMessage', "<span class='errorMessage'>" + json.error + '</error>'); } else { Element.update('loginMessage', responseText); } } }); }
-
 </script>
- </sec:ifNotLoggedIn>
 

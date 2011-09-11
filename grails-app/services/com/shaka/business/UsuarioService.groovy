@@ -70,7 +70,7 @@ class UsuarioService {
      * @param usuario usuario com a imagem
      * @param nomeImagem nome da imagem
      * @param imagem foto do usuario
-     * @return Retorna true caso a imagem seja tranferida com sucesso. Caso contrario false.
+     * @return Retorna true caso a imagem seja transferida com sucesso. Caso contrario false.
      */
     private boolean uploadImagemUsuario(Usuario usuario, String nomeImagem, MultipartFile imagem){
         if(imagem != null && !imagem.empty && nomeImagem != null){
@@ -85,7 +85,6 @@ class UsuarioService {
                 // apaga a imagem antiga caso exista
                 imageService.deleteImage(diretorioImagem, usuario.pathImagem)
             }
-            // TODO criar hash para o nome do arquivo
             def nome = UUID.randomUUID().toString() + "_imagem_" + usuario.id + "_" + nomeImagem
             imageService.saveImage(diretorioImagem,nome,imagem)
             usuario.pathImagem = nome
