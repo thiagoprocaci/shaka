@@ -41,6 +41,7 @@ function authAjax() {
          var responseText = response.responseText || '[]';
          var json = responseText.evalJSON();
          if (json.success) {
+             // pegar o ultimo GET
         	 window.location.reload();
          }
          else if (json.error) {

@@ -11,4 +11,14 @@ beans = {
         diretorioImagem = "web-app/images/uploads/"
         diretorioImagemRelativo = "images/uploads/"
         }
+
+	requestService(com.shaka.support.RequestService) { bean ->
+		bean.scope = 'session'
+	}
+
+	applicationFilters(com.shaka.filter.ApplicationFilters) { bean ->
+		bean.scope = 'request'
+		requestService = ref("requestService")
+	}
+
 }

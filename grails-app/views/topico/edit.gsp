@@ -1,5 +1,3 @@
-
-
 <%@ page import="com.shaka.Topico" %>
 <html>
     <head>
@@ -30,7 +28,7 @@
                 <div class="dialog">
                     <table>
                         <tbody>
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="titulo"><g:message code="topico.titulo.label" default="Titulo" /></label>
@@ -39,13 +37,13 @@
                                     <g:textField name="titulo" value="${topicoInstance?.titulo}" />
                                 </td>
                             </tr>
-                        
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="mensagemList"><g:message code="topico.mensagemList.label" default="Mensagem List" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: topicoInstance, field: 'mensagemList', 'errors')}">
-                                    
+
 <ul>
 <g:each in="${topicoInstance?.mensagemList?}" var="m">
     <li><g:link controller="mensagem" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
@@ -55,7 +53,7 @@
 
                                 </td>
                             </tr>
-                        
+
                         </tbody>
                     </table>
                 </div>

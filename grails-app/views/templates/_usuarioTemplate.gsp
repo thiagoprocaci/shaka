@@ -6,7 +6,7 @@
             <g:message code="novoUsuario"/>
         </g:if>
         <g:if test="${usuarioInstance.id != null}">
-            <g:message code="editarUsuario"/>
+            <g:message code="meuPerfil"/>
         </g:if>
     </h1>
     <g:if test="${message}">
@@ -22,7 +22,7 @@
             <img src="${resource(dir: diretorioImagem, file: usuarioInstance?.pathImagem)}" style="width:140px;height:140px" />
         </div>
     </g:if>
-    <g:form action="${action}" enctype="multipart/form-data">
+    <g:form action="${action}" enctype="multipart/form-data" method="POST">
         <div class="dialog">
             <table>
                 <tbody>
@@ -50,10 +50,10 @@
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'username', 'errors')}">
                             <g:if test="${usuarioInstance.id == null}">
-                            	<g:textField name="username" value="${usuarioInstance?.username}" maxlength="255" />
+                                <g:textField name="username" value="${usuarioInstance?.username}" maxlength="255" />
                             </g:if>
                             <g:if test="${usuarioInstance.id != null}">
-                            	${usuarioInstance?.username}
+                                ${usuarioInstance?.username}
                             </g:if>
                         </td>
                     </tr>
@@ -67,24 +67,25 @@
                         </td>
                     </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="senha"><g:message code="senha"  /></label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'password', 'errors')}">
-                            <g:passwordField name="senha" value="" maxlength="255" />
-                        </td>
-                    </tr>
+					<g:if test="${usuarioInstance.id == null}">
+	                    <tr class="prop">
+	                        <td valign="top" class="name">
+	                            <label for="senha"><g:message code="senha"  /></label>
+	                        </td>
+	                        <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'password', 'errors')}">
+	                            <g:passwordField name="senha" value="" maxlength="255" />
+	                        </td>
+	                    </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="confirmacaoSenha"><g:message code="confirmacaoSenha"  /></label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'password', 'errors')}">
-                            <g:passwordField name="confirmacaoSenha" value="" maxlength="255" />
-                        </td>
-                    </tr>
-
+	                    <tr class="prop">
+	                        <td valign="top" class="name">
+	                            <label for="confirmacaoSenha"><g:message code="confirmacaoSenha"  /></label>
+	                        </td>
+	                        <td valign="top" class="value ${hasErrors(bean: usuarioInstance, field: 'password', 'errors')}">
+	                            <g:passwordField name="confirmacaoSenha" value="" maxlength="255" />
+	                        </td>
+	                    </tr>
+                    </g:if>
 
                     <tr class="prop">
                         <td valign="top" class="name">

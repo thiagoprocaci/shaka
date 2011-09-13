@@ -34,8 +34,13 @@
             <div id="menuDadosUsuario">
                 <div class="menuInfo boldText">${userObject?.nome}</div>
                 <div class="menuInfo">${userObject?.email}</div>
-                <div class="menuInfo"><br>
-                   <g:link controller="usuario" action="edit"><g:message code="meuPerfil" /></g:link>
+                <div class="menuInfo"><br />
+                   <div>
+                      <g:link controller="usuario" action="edit"><g:message code="meuPerfil" /></g:link>
+                   </div>
+                   <div>
+                       <g:link controller="usuario" action="changePassword"><g:message code="trocaSenha" /></g:link>
+                   </div>
                 </div>
             </div>
             <br class="clear">
@@ -46,9 +51,9 @@
         </div>
  </sec:ifLoggedIn>
  <sec:ifNotLoggedIn>
- 	<div id="menuUsuario" style="display:none">
-		<g:render template='/templates/ajaxLogin'/>
-	</div>
+     <div id="menuUsuario" style="display:none">
+        <g:render template='/templates/ajaxLogin'/>
+    </div>
  </sec:ifNotLoggedIn>
 
 <script type="text/javascript">

@@ -11,7 +11,7 @@ import com.shaka.Usuario
  *
  */
 class UsuarioService {
-    static transactional = true
+    static transactional = false
     String diretorioImagem
     String diretorioImagemRelativo
     long tamanhoMaximoImagem = 512000 // (512000 bytes = 500 KB)
@@ -41,24 +41,24 @@ class UsuarioService {
         if(usuario == null) {
             return false
         }
-		boolean senhaDiferente = false
-		boolean saved = false
-		if(StringUtils.hasText(senha)) {
-			if(senha != confirmacaoSenha) {
-				senhaDiferente = true
-			}
-			if(usuario.password != springSecurityService.encodePassword(senha)){
-				usuario.password = senha
-			}
-		}
-		if(usuario.validate()) {
-			if(senhaDiferente == true) {
-				usuario.errors.rejectValue "password", "senhaDiferenteConfirmacao"
-			} else {
-				saved = usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
-			}
-		}
-		// somente reautentica se o usuario tenha sido salvo e a sua senha alterada
+        boolean senhaDiferente = false
+        boolean saved = false
+        if(StringUtils.hasText(senha)) {
+            if(senha != confirmacaoSenha) {
+                senhaDiferente = true
+            }
+            if(usuario.password != springSecurityService.encodePassword(senha)){
+                usuario.password = springSecurityService.encodePassword(senha)
+            }
+        }
+        if(usuario.validate()) {
+            if(Boolean.FALSE.equals(senhaDiferente)) {
+                saved = usuario.save() && uploadImagemUsuario(usuario, nomeImagem, imagem)
+            } else  if(Boolean.TRUE.equals(senhaDiferente)) {
+                usuario.errors.rejectValue "password", "senhaDiferenteConfirmacao"
+            }
+        }
+        // somente reautentica se o usuario tenha sido salvo e a sua senha alterada
         if(saved && StringUtils.hasText(senha)) {
             springSecurityService.reauthenticate(usuario.username, senha)
         }

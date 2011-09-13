@@ -1,12 +1,14 @@
 package com.shaka
 
+import org.springframework.util.StringUtils;
+
 /**
  *
  * Controller para manipular dados de usuario
  *
  */
 class UsuarioController {
-    static allowedMethods = [save: "POST", update: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", updatePassword: "POST"]
     def usuarioService
 
     def index = {
@@ -48,6 +50,31 @@ class UsuarioController {
     def update = {
         def usuarioInstance = usuarioService.getCurrentUser()
         saveOrUpdate(usuarioInstance, "edit")
+    }
+
+    /**
+     * Get para a tela de trocar senha do usuario
+     */
+    def changePassword = {
+        def usuarioInstance = usuarioService.getCurrentUser()
+        if (usuarioInstance) {
+            return [usuarioInstance: usuarioInstance]
+        } else {
+          redirect(uri:"/")
+        }
+    }
+
+    /**
+     * Post para atualizar a senha do usuario
+     */
+    def updatePassword = {
+        def usuarioInstance = usuarioService.getCurrentUser()
+        if(!StringUtils.hasText(params.senha)) {
+            usuarioInstance.errors.rejectValue "password", "senhaBranco"
+            render(view: "changePassword", model: [usuarioInstance: usuarioInstance])
+        } else {
+            saveOrUpdate(usuarioInstance, "changePassword")
+        }
     }
 
     /**

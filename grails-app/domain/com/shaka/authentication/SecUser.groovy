@@ -25,14 +25,14 @@ class SecUser {
     }
 
     def beforeInsert() {
-        encodePassword()
+      //  encodePassword()
         enabled = true
     }
 
     def beforeUpdate() {
-        if (isDirty('password')) {
-            encodePassword()
-        }
+    //    if (isDirty('password')) {
+     //       encodePassword()
+      //  }
     }
 
     protected void encodePassword() {
