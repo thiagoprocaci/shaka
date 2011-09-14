@@ -16,7 +16,7 @@
          <input type='checkbox' class='chk' id='remember_me'  name='_spring_security_remember_me'/>
       </p>
       <p>
-      	 <input type="submit" onclick="authAjax(); return false;" value="${message(code:'entrar')}">
+           <input type="submit" onclick="authAjax(); return false;" value="${message(code:'entrar')}">
       </p>
    </form>
     <div style='display: none; text-align: left;' id='loginMessage'></div>
@@ -41,8 +41,8 @@ function authAjax() {
          var responseText = response.responseText || '[]';
          var json = responseText.evalJSON();
          if (json.success) {
-             // pegar o ultimo GET
-        	 window.location.reload();
+             // pegar o ultimo GET para o refresh
+             window.location.href = json.refreshUrl
          }
          else if (json.error) {
             Element.update('loginMessage', "<span class='errorMessage'>" +

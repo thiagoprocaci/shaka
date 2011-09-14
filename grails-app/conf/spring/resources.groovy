@@ -1,3 +1,5 @@
+import org.springframework.aop.scope.ScopedProxyFactoryBean
+
 // Place your Spring DSL code here
 beans = {
 
@@ -12,13 +14,9 @@ beans = {
         diretorioImagemRelativo = "images/uploads/"
         }
 
-	requestService(com.shaka.support.RequestService) { bean ->
-		bean.scope = 'session'
-	}
-
-	applicationFilters(com.shaka.filter.ApplicationFilters) { bean ->
-		bean.scope = 'request'
-		requestService = ref("requestService")
-	}
+    flowManagerServiceProxy(ScopedProxyFactoryBean) {
+        targetBeanName = 'flowManagerService'
+        proxyTargetClass = true
+    }
 
 }

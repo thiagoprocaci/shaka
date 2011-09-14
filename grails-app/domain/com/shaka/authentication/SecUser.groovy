@@ -18,6 +18,7 @@ class SecUser {
 
     static mapping = {
         password column: '`password`'
+   //     tablePerhierarchy(false)
     }
 
     Set<SecRole> getAuthorities() {

@@ -2,7 +2,7 @@ package com.shaka.support
 
 import grails.test.*
 
-class RequestServiceTests extends GrailsUnitTestCase {
+class FlowManagerServiceTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

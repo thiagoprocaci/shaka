@@ -7,16 +7,13 @@ package com.shaka.filter
  */
 class ApplicationFilters {
 
-	def requestService
+    def flowManagerServiceProxy
 
     def filters = {
         all(controller:'*', action:'*') {
             before = {
-              if("POST".equals(request.getMethod())) {
-				  requestService.lastPostUrl = request.getRequestURL()
-			  } else if ("GET".equals(request.getMethod())){
-			  	  requestService.lastGetUrl = request.getRequestURL()
-			  }
+                // deixamos o flow manager saber o que esta ocorrendo...
+               flowManagerServiceProxy.processRequest(request)
             }
             after = {
 
