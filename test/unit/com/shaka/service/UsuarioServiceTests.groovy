@@ -24,8 +24,7 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testGetCurrentUserSucesso(){
-        springSecurityService.demand.encodePassword("senha") { -> return "senha" }
+    void testGetCurrentUserSucesso(){        
         Usuario u = getUsuario()
         u.save()
         springSecurityService.demand.getPrincipal() { -> return u }

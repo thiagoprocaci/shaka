@@ -14,24 +14,21 @@ class FlowManagerService {
 
 	String lastGetUrl
 	String lastPostUrl
-	String lastAjaxUrl
+
 
 	/**
 	 * Processa a url vinda do request
 	 */
-	def processRequest = {
-		request ->
+	def processRequest = {	request ->
 		// somente http request...
 		if(request instanceof HttpServletRequest){
 			// nao nos interessa ajax request
 			if(isAjax(request) == false){
 				if("POST".equals(request.getMethod())) {
-					lastPostUrl = request.getRequestURL()
+					lastPostUrl =  request.forwardURI
 				} else if ("GET".equals(request.getMethod())){
-					lastGetUrl = request.getRequestURL()
+					lastGetUrl =  request.forwardURI
 				}
-			} else {
-				lastAjaxUrl = request.getRequestURL()
 			}
 		}
 	}
@@ -49,11 +46,8 @@ class FlowManagerService {
 		}
 		// assume-se que as requisicoes ajax contem a string "ajax" na url...
 		// a primeira condicao nao eh suficiente para diferentes ambientes
-		String url = request.getRequestURL()
+		String url = request.forwardURI
 		if(url.contains("ajax")){
-			return true
-		}
-		if(url.endsWith(".dispatch")){
 			return true
 		}
 		return  false

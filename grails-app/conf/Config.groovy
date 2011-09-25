@@ -93,3 +93,10 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.shaka.authentication.SecUser'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.shaka.authentication.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'com.shaka.authentication.SecRole'
+
+import grails.plugins.springsecurity.SecurityConfigType
+grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+grails.plugins.springsecurity.interceptUrlMap = [
+	'/debate/createTopico': ['IS_AUTHENTICATED_FULLY'],
+	'/debate/responderTopico': ['IS_AUTHENTICATED_FULLY'],
+]
