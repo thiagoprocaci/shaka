@@ -99,4 +99,6 @@ grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptU
 grails.plugins.springsecurity.interceptUrlMap = [
 	'/debate/createTopico': ['IS_AUTHENTICATED_FULLY'],
 	'/debate/responderTopico': ['IS_AUTHENTICATED_FULLY'],
+	'/debate/createTopico/**': ['IS_AUTHENTICATED_FULLY'],
+	'/debate/responderTopico/**': ['IS_AUTHENTICATED_FULLY']
 ]
