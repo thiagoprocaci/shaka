@@ -1,4 +1,4 @@
-package com.shaka
+package com.shaka.domain
 
 import grails.test.*
 

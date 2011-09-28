@@ -42,18 +42,20 @@
                      </td>
                  </tr>
                  <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                     <td colspan="2">
+                     <td colspan="2" id="message_${m.id}">
                         ${m?.usuario?.assinatura?.decodeHTML()}
                         <sec:ifLoggedIn>
-                            <div id="message_${m.id}">
+                            <div>
                                ${DebateController.getTextoAvaliacaoMensagem(m)}
                             </div>
-                           <g:remoteLink action="avaliarMensagem" id="${m.id}" params="${[avaliacao:true]}" update="message_${m.id}">
-                               <g:message code="gostei"/>
-                           </g:remoteLink>
-                            <g:remoteLink action="avaliarMensagem" id="${m.id}" params="${[avaliacao:false]}" update="message_${m.id}">
-                                <g:message code="naoGostei"/>
-                            </g:remoteLink>
+                           <g:if test="${!AvaliacaoMensagem.avaliouMensagem(m,sec.loggedInUserInfo(field:'username'))}">
+                           		<g:remoteLink action="avaliarMensagem" id="${m.id}" params="${[avaliacao:true]}" update="message_${m.id}">
+                               		<g:message code="gostei"/>
+                           		</g:remoteLink>
+                            	<g:remoteLink action="avaliarMensagem" id="${m.id}" params="${[avaliacao:false]}" update="message_${m.id}">
+                                	<g:message code="naoGostei"/>
+                            	</g:remoteLink>
+                           </g:if>
                         </sec:ifLoggedIn>
                      </td>
                  </tr>
