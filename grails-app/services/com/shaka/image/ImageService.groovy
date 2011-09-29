@@ -49,6 +49,22 @@ class ImageService {
         }
     }
 
+	/**
+	* Grava uma imagem no diretorio temporario
+	* @param nomeImagem nome do arquivo
+	* @param imagem que sera salva
+	* @throws IOException caso o diretorio nao exista
+	*/
+   public void saveImageInTempDir(String nomeImagem, MultipartFile imagem){
+	   String tempdir = System.getProperty("java.io.tmpdir")
+	   if (!(tempdir.endsWith("/") || tempdir.endsWith("\\"))){
+		   tempdir = tempdir + System.getProperty("file.separator")
+	   }
+	   saveImage(tempdir, nomeImagem, imagem)
+   }
+
+
+
     /**
      * Exclui uma imagem
      * @param diretorio diretorio onde a imagem sera salva
