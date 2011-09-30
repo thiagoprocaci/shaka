@@ -1,0 +1,11 @@
+Alterações necessárias para trabalhar no projeto.
+
+-------------------------------------
+Configurando o projeto para o Eclipse
+-------------------------------------
+grails integrate-with --eclipse
+
+-------------------------------------
+Configurando o projeto para o IntelliJ
+-------------------------------------
+grails integrate-with --intellij
