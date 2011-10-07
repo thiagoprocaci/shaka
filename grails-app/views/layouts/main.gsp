@@ -23,8 +23,6 @@
 
         <g:layoutBody />
 
-<!--
-        <g:render template="/templates/fileUpload"></g:render>
-         -->
+
     </body>
 </html>

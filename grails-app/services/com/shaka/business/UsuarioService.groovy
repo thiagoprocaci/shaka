@@ -19,6 +19,16 @@ class UsuarioService {
     def imageService
 
     /**
+     * Salva imagem temporaria do usuario
+     * @param image imagem a ser salva
+     * @return Retorna imagem
+     */
+    public File saveTempUserImage(String nomeImagem, MultipartFile image) {
+        def nome = UUID.randomUUID().toString() + "_imagem_"  + nomeImagem
+        return imageService.saveImageInTempDir(nome,image)
+    }
+
+    /**
      *
      * @return Retorna o usuario corrente da aplicacao
      */

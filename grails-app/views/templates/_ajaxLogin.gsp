@@ -46,7 +46,7 @@ function authAjax() {
          }
          else if (json.error) {
             Element.update('loginMessage', "<span class='errorMessage'>" +
-                                           json.error + '</error>');
+                                           json.error + '</span>');
          }
          else {
             Element.update('loginMessage', responseText);
