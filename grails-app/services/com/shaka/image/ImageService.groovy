@@ -45,7 +45,15 @@ class ImageService {
     public void saveImage(String diretorio, String nomeImagem, MultipartFile imagem){
         // TODO Verificar possibilidade de usar o imageTool para redimencionar a imagem
         if(imagem != null && !imagem.empty){
-            imagem.transferTo(new File(diretorio + nomeImagem))
+             File file = new File(diretorio + nomeImagem)
+             FileOutputStream fop = new FileOutputStream(file);
+             fop.write(imagem.getBytes());
+             fop.flush();
+             fop.close();
+
+             //file << imagem.inputStream
+            // manipular stream
+            //imagem.transferTo(new File(diretorio + nomeImagem))
         }
     }
 
@@ -56,6 +64,7 @@ class ImageService {
     * @throws IOException caso o diretorio nao exista
     */
    public File saveImageInTempDir(String nomeImagem, MultipartFile imagem){
+       // TODO matar esse metodo
        if(imagem != null && !imagem.empty){
            String tempdir = System.getProperty("java.io.tmpdir")
            if (!(tempdir.endsWith("/") || tempdir.endsWith("\\"))){
@@ -93,6 +102,7 @@ class ImageService {
         }
         return true;
     }
+
 }
 
 

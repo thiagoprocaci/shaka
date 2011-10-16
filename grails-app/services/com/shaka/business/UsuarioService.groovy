@@ -23,9 +23,9 @@ class UsuarioService {
      * @param image imagem a ser salva
      * @return Retorna imagem
      */
-    public File saveTempUserImage(String nomeImagem, MultipartFile image) {
-        def nome = UUID.randomUUID().toString() + "_imagem_"  + nomeImagem
-        return imageService.saveImageInTempDir(nome,image)
+    public boolean saveUserImage(String nomeImagem, MultipartFile image) {
+        def usuario = getCurrentUser()
+        return save(usuario, nomeImagem, image, null, null)
     }
 
     /**
@@ -48,12 +48,13 @@ class UsuarioService {
      * @return Retorna true caso seja bem sucedida a atualizacao
      */
     public boolean save(Usuario usuario, String nomeImagem, MultipartFile imagem, String senha, String confirmacaoSenha){
+        // esse metodo deve ser privado
         if(usuario == null) {
             return false
         }
         boolean senhaDiferente = false
         boolean saved = false
-        if(StringUtils.hasText(senha)) {
+        if(StringUtils.hasText(senha)) {;
             if(senha != confirmacaoSenha) {
                 senhaDiferente = true
             }

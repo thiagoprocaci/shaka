@@ -10,7 +10,7 @@ beans = {
     usuarioService(com.shaka.business.UsuarioService) {
         springSecurityService = ref("springSecurityService")
         imageService = ref("imageService")
-        diretorioImagem = "web-app/images/uploads/"
+        diretorioImagem = "D:\\Projetos\\lib\\shaka\\uploads\\"
         diretorioImagemRelativo = "images/uploads/"
         }
 
