@@ -11,8 +11,8 @@
     <h1>
         <g:message code="imagemUsuario"/>
     </h1>
-    <g:if test="${message}">
-        <div class="message">${message}</div>
+    <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
     </g:if>
     <g:hasErrors bean="${usuarioInstance}">
     <div class="errors">
@@ -24,7 +24,7 @@
             <img src="${resource(dir: diretorioImagem, file: usuarioInstance?.pathImagem)}" style="width:140px;height:140px" />
         </div>
     </g:if>
-    <g:form action="update" enctype="multipart/form-data" method="POST">
+    <g:form action="updateImage" enctype="multipart/form-data" method="POST">
         <div class="dialog">
             <table>
                 <tbody>

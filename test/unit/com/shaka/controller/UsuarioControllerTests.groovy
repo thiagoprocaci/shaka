@@ -96,11 +96,31 @@ class UsuarioControllerTests extends ControllerUnitTestCase {
         def map = controller.edit()
         assertNotNull map
         assertNotNull map.usuarioInstance
-        assertNotNull map.diretorioImagem
-        assertEquals 2, map.size()
+        assertEquals 1, map.size()
         assertEquals usuario, map.usuarioInstance
-        assertEquals  controller.usuarioService.diretorioImagemRelativo, map.diretorioImagem
     }
+
+	void testChangeImageErro() {
+		usuarioService.demand.getCurrentUser()  { -> return null }
+		def map = controller.changeImage()
+		assertNull map
+		assertNotNull controller.redirectArgs
+		assertNotNull controller.redirectArgs.uri
+		assertEquals 1, controller.redirectArgs.size()
+		assertEquals "/", controller.redirectArgs.uri
+	}
+
+	void testChangeImageSucesso() {
+		def usuario = new Usuario(id:1)
+		usuarioService.demand.getCurrentUser()  { -> return usuario }
+		def map = controller.changeImage()
+		assertNotNull map
+		assertNotNull map.usuarioInstance
+		assertNotNull map.diretorioImagem
+		assertEquals 2, map.size()
+		assertEquals usuario, map.usuarioInstance
+		assertEquals controller.usuarioService.diretorioImagemRelativo, map.diretorioImagem
+	}
 
     void testUpdateErroUsuarioNull () {
         usuarioService.demand.getCurrentUser()  { -> return null }
@@ -141,10 +161,35 @@ class UsuarioControllerTests extends ControllerUnitTestCase {
         }
         controller.update()
         assertNotNull controller.redirectArgs
-        assertNotNull controller.redirectArgs.uri
+        assertNotNull controller.redirectArgs.action
         assertNotNull controller.flash.message
         assertEquals 1, controller.redirectArgs.size()
-        assertEquals "/", controller.redirectArgs.uri
+        assertEquals "edit", controller.redirectArgs.action
         assertEquals "salvoSucesso", controller.flash.message
     }
+
+	void testUpdateImageErro() {
+		def usuario = new Usuario(id:1)
+		usuarioService.demand.getCurrentUser()  { -> return usuario }
+		controller.updateImage()
+		assertNotNull(usuario.errors)
+		assertFalse(usuario.errors.isEmpty())
+		assertEquals("nenhumaImagemSelecionada", usuario.errors['pathImagem'])
+		assertNotNull controller.renderArgs
+		assertNotNull controller.renderArgs.view
+		assertNotNull controller.renderArgs.model
+		assertNotNull controller.renderArgs.model.usuarioInstance
+		assertNotNull controller.renderArgs.model.diretorioImagem
+		assertEquals "changeImage", controller.renderArgs.view
+		assertEquals controller.usuarioService.diretorioImagemRelativo, controller.renderArgs.model.diretorioImagem
+		assertEquals usuario, controller.renderArgs.model.usuarioInstance
+		assertEquals 2, controller.renderArgs.size()
+		assertEquals 2, controller.renderArgs.model.size()
+	}
+
+	/*void testUpdateImageSucesso() {
+		def usuario = new Usuario(id:1)
+		usuarioService.demand.getCurrentUser()  { -> return usuario }
+
+	}*/
 }

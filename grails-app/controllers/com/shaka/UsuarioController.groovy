@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
  *
  */
 class UsuarioController {
-    static allowedMethods = [save: "POST", update: "POST", updatePassword: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", updatePassword: "POST", updateImage: "POST"]
     def usuarioService
 
     def index = {
@@ -29,7 +29,7 @@ class UsuarioController {
      */
     def save = {
         def usuarioInstance = new Usuario()
-        saveOrUpdate(usuarioInstance, "create")
+        saveOrUpdate(usuarioInstance, "create", null)
     }
 
     /**
@@ -38,7 +38,7 @@ class UsuarioController {
     def edit = {
         def usuarioInstance = usuarioService.getCurrentUser()
         if (usuarioInstance) {
-            return [usuarioInstance: usuarioInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
+            return [usuarioInstance: usuarioInstance]
         } else {
           redirect(uri:"/")
         }
@@ -56,12 +56,25 @@ class UsuarioController {
 		}
 	}
 
+	/**
+	 * Post para atualizar a imagem do usuario
+	 */
+	def updateImage = {
+		def usuarioInstance = usuarioService.getCurrentUser()
+		if(params.file == null || request.getFile("file") == null || request.getFile("file").empty) {
+			usuarioInstance.errors.rejectValue "pathImagem", "nenhumaImagemSelecionada"
+			render(view: "changeImage", model: [usuarioInstance: usuarioInstance, diretorioImagem : usuarioService.diretorioImagemRelativo])
+		} else {
+			saveOrUpdate(usuarioInstance, "changeImage", "changeImage")
+		}
+	}
+
     /**
      * Post para atualizar o usuario
      */
     def update = {
         def usuarioInstance = usuarioService.getCurrentUser()
-        saveOrUpdate(usuarioInstance, "edit")
+        saveOrUpdate(usuarioInstance, "edit", "edit")
     }
 
     /**
@@ -85,7 +98,7 @@ class UsuarioController {
             usuarioInstance.errors.rejectValue "password", "senhaBranco"
             render(view: "changePassword", model: [usuarioInstance: usuarioInstance])
         } else {
-            saveOrUpdate(usuarioInstance, "changePassword")
+            saveOrUpdate(usuarioInstance, "changePassword","changePassword")
         }
     }
 
@@ -95,7 +108,7 @@ class UsuarioController {
      * @param viewError string que identifica a pagina de erro
      * @return Retorna proxima pagina a ser exibida
      */
-    private saveOrUpdate(def usuario, def viewError) {
+    private saveOrUpdate(def usuario, def viewError, def viewRedirect) {
         if (usuario) {
             usuario.properties = params
             def nomeOriginal = null
@@ -106,7 +119,12 @@ class UsuarioController {
             }
             if (usuarioService.save(usuario, nomeOriginal, file, params.senha, params.confirmacaoSenha)) {
                 flash.message = "${message(code: 'salvoSucesso')}"
-                redirect(uri:"/")
+                if(viewRedirect) {
+				  redirect(action:viewRedirect)
+				} else {
+				  redirect(uri:"/")
+				}
+
             } else {
                 render(view: viewError, model: [usuarioInstance: usuario])
             }
