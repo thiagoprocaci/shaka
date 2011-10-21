@@ -24,7 +24,7 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testGetCurrentUserSucesso(){        
+    void testGetCurrentUserSucesso(){
         Usuario u = getUsuario()
         u.save()
         springSecurityService.demand.getPrincipal() { -> return u }
@@ -76,7 +76,9 @@ class UsuarioServiceTests extends GrailsUnitTestCase {
         imageService.demand.extensaoValida() { nomeImagem -> return true }
         imageService.demand.tamanhoImagemValido() { imagem, tamanhoMax -> return true }
         imageService.demand.deleteImage() { diretorio, nomeImagem -> }
+		imageService.demand.deleteImage() { diretorio, nomeImagem -> }
         imageService.demand.saveImage() { diretorio, nomeImagem,imagem -> }
+		imageService.demand.saveImage() { diretorio, nomeImagem,imagem -> }
         Usuario u = getUsuario()
         // u.id = 1 -- isDirty nao eh adicionado dinamicamente no mock GRAILS-7506
         u.pathImagem = "teste"

@@ -43,40 +43,14 @@ class ImageService {
      * @throws IOException caso o diretorio nao exista
      */
     public void saveImage(String diretorio, String nomeImagem, MultipartFile imagem){
-        // TODO Verificar possibilidade de usar o imageTool para redimencionar a imagem
         if(imagem != null && !imagem.empty){
              File file = new File(diretorio + nomeImagem)
              FileOutputStream fop = new FileOutputStream(file);
              fop.write(imagem.getBytes());
              fop.flush();
              fop.close();
-
-             //file << imagem.inputStream
-            // manipular stream
-            //imagem.transferTo(new File(diretorio + nomeImagem))
         }
     }
-
-    /**
-    * Grava uma imagem no diretorio temporario
-    * @param nomeImagem nome do arquivo
-    * @param imagem que sera salva
-    * @throws IOException caso o diretorio nao exista
-    */
-   public File saveImageInTempDir(String nomeImagem, MultipartFile imagem){
-       // TODO matar esse metodo
-       if(imagem != null && !imagem.empty){
-           String tempdir = System.getProperty("java.io.tmpdir")
-           if (!(tempdir.endsWith("/") || tempdir.endsWith("\\"))){
-               tempdir = tempdir + System.getProperty("file.separator")
-           }
-           File file = new File(tempdir + nomeImagem)
-           imagem.transferTo(file)
-           return file
-       }
-       return null
-   }
-
 
 
     /**
@@ -87,8 +61,39 @@ class ImageService {
      */
     public void deleteImage(String diretorio, String nomeImagem){
         def file = new File(diretorio + nomeImagem)
-        file.delete();
+        file.delete()
     }
+
+	/**
+	* Verifica se uma imagem existe
+	* @param diretorio diretorio onde a imagem se localiza
+	* @param nomeImagem nome do arquivo
+	*
+	*/
+	public boolean existImage(String diretorio, String nomeImagem){
+		def file = new File(diretorio + nomeImagem)
+		return file.exists()
+	}
+
+	/**
+	 * Copia uma imagem de um diretorio para outro
+	 * @param pathSrc caminho da imagem original
+	 * @param pathDst caminho da copia da imagem
+	 * @throws IOException
+	 */
+	public void copyImage(String pathSrc, String pathDst) throws IOException{
+		File src = new File(pathSrc)
+		File dst = new File(pathDst)
+		InputStream in_ = new FileInputStream(src)
+		OutputStream out = new FileOutputStream(dst)
+		byte[] buf = new byte[1024]
+		int len
+		while ((len = in_.read(buf)) > 0) {
+			out.write(buf, 0, len)
+		}
+		in_.close()
+		out.close()
+	}
 
     /**
      * Verifica se o tamanho da imagem eh valida

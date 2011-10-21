@@ -44,6 +44,18 @@ class UsuarioController {
         }
     }
 
+	/**
+	 * Get para a pagina de trocar imagem do usuario
+	 */
+	def changeImage = {
+		def usuarioInstance = usuarioService.getCurrentUser()
+		if (usuarioInstance) {
+			return [usuarioInstance: usuarioInstance, diretorioImagem : usuarioService.diretorioImagemRelativo]
+		} else {
+		  redirect(uri:"/")
+		}
+	}
+
     /**
      * Post para atualizar o usuario
      */

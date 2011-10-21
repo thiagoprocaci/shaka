@@ -1,6 +1,7 @@
 package startup
 
 import com.shaka.Forum
+import com.shaka.Usuario
 
 /**
  *  Configuracoes necessarias para iniciar
@@ -8,6 +9,8 @@ import com.shaka.Forum
  *
  */
 class ApplicationSettings {
+
+	def springSecurityService
 
     def init = {
          def forumNoticias = new Forum(nome:"Noticias",descricao:"Noticias gerais sobre o assunto tal. ")
@@ -17,6 +20,9 @@ class ApplicationSettings {
          forumNoticias.save()
          forumCultura.save()
          forumReclamacoes.save()
+
+		 def u = new Usuario(username : "thomas", email : "edison@teste.com", password: springSecurityService.encodePassword("senha"), nome:"Thomas Alva Edison")
+		 u.save()
 
     }
 }

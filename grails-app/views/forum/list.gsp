@@ -54,10 +54,6 @@
                         </tbody>
                     </table>
             </div>
-            <g:render template="/templates/fileUpload"></g:render>
         </div>
-
-
-
     </body>
 </html>
